@@ -1,0 +1,117 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark cr-nav sticky-top border-bottom border-secondary-subtle">
+  <div class="container py-2">
+
+    <!-- Hamburguesa (izquierda) -->
+    <button class="navbar-toggler d-lg-none p-2 order-0"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#mobileNavOffcanvas"
+            aria-controls="mobileNavOffcanvas"
+            aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Marca (centro en móvil: SOLO LOGO) -->
+    <a class="navbar-brand d-flex d-lg-none align-items-center justify-content-center flex-grow-1 m-0 order-1"
+       routerLink="/"
+       aria-label="Inicio">
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" width="80" height="80" class="cr-logo" />
+    </a>
+
+    <!-- Iconos (derecha) -->
+    <div class="d-flex align-items-center gap-3 order-2">
+
+      <!-- Lupa -->
+      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center"
+              type="button"
+              aria-label="Buscar / Filtrar"
+              data-bs-toggle="modal"
+              data-bs-target="#filterModal">
+        <i class="bi bi-search fs-5"></i>
+      </button>
+
+      <!-- Login -->
+      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center"
+              type="button"
+              aria-label="Acceso"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal">
+
+        <i class="bi bi-person fs-5"></i>
+
+        <!-- ESTADO DE SESIÓN -->
+        <span *ngIf="isLogged" class="ms-2 small text-warning">
+          {{ userEmail }}
+        </span>
+      </button>
+
+      <!-- Carrito -->
+      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center position-relative"
+              type="button"
+              aria-label="Carrito"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartOffcanvas"
+              aria-controls="cartOffcanvas">
+
+        <i class="bi bi-bag fs-5"></i>
+
+        <!-- BADGE DEL CARRITO -->
+        <span *ngIf="cartCount > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+          {{ cartCount }}
+        </span>
+      </button>
+
+    </div>
+
+    <!-- Marca CHR para PC -->
+    <a class="navbar-brand d-none d-lg-flex align-items-center gap-2 order-lg-0" routerLink="/">
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" width="60" height="60" class="cr-logo" />
+      <span class="cr-brand-title">CHRONO ROYAL</span>
+    </a>
+
+    <!-- Navegación PC -->
+    <div class="d-none d-lg-flex flex-grow-1 justify-content-center order-lg-1">
+      <ul class="navbar-nav gap-lg-2">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/colecciones">Colecciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/sobre-nosotros">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacto">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Navegación Menu de hamburguesa (móvil) -->
+<div aria-labelledby="mobileNavOffcanvasLabel"
+     class="offcanvas offcanvas-start cr-offcanvas"
+     id="mobileNavOffcanvas"
+     tabindex="-1">
+
+  <div class="offcanvas-header border-bottom border-secondary-subtle">
+    <h5 class="offcanvas-title cr-h3 m-0" id="mobileNavOffcanvasLabel">
+      Menú
+    </h5>
+    <button aria-label="Cerrar" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" type="button"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <ul class="navbar-nav vstack gap-1">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/colecciones">Colecciones</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/sobre-nosotros">Sobre Nosotros</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/contacto">Contacto</a>
+      </li>
+    </ul>
+  </div>
+</div>

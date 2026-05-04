@@ -1,0 +1,21 @@
+.footer-link {
+  color: rgba(244, 244, 246, 0.78);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--cr-gold);
+}
+
+.footer-social {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+}
+
+.footer-social:hover {
+  color: var(--cr-gold);
+}
+
+footer img {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
+}

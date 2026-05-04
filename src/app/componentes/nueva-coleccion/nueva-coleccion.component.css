@@ -1,0 +1,9 @@
+:host {
+  display: block;
+  background: var(--cr-bg);
+  color: var(--cr-text);
+}
+.cr-ratio-product {
+  --bs-aspect-ratio: 115%;
+}
+

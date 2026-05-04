@@ -1,0 +1,527 @@
+<!-- MODAL LUPA -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-black text-light border border-white border-opacity-25 shadow-lg rounded-4">
+      <div class="modal-header border-0 pb-2">
+        <h5 class="modal-title text-uppercase fw-semibold mb-0">Buscar / Filtrar</h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button>
+      </div>
+
+      <hr class="border-white border-opacity-70 mt-1 mb-4" />
+      <hr class="border-white border-opacity-25 m-0" />
+
+      <div class="modal-body pt-3">
+        <form class="vstack gap-3" id="filterForm">
+
+          <!-- Marca -->
+          <div>
+            <label class="form-label small text-white-50">Marca</label>
+
+            <select class="d-none" id="filterBrand">
+              <option value="">Todas</option>
+              <option value="Rolex">Rolex</option>
+              <option value="Patek Philippe">Patek Philippe</option>
+              <option value="Richard Mille">Richard Mille</option>
+            </select>
+
+            <div class="dropdown">
+              <button class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                      id="filterBrandBtn"
+                      data-bs-toggle="dropdown"
+                      type="button">
+                <span id="filterBrandText">Todas</span>
+                <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-dark w-100">
+                <li><button class="dropdown-item" data-target="filterBrand" data-value="">Todas</button></li>
+                <li><button class="dropdown-item" data-target="filterBrand" data-value="Rolex">Rolex</button></li>
+                <li><button class="dropdown-item" data-target="filterBrand" data-value="Patek Philippe">Patek Philippe</button></li>
+                <li><button class="dropdown-item" data-target="filterBrand" data-value="Richard Mille">Richard Mille</button></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Precios -->
+          <div class="row g-2">
+            <div class="col-6">
+              <label class="form-label small text-white-50">Precio mín. (€)</label>
+              <input id="filterMin" type="number" min="0"
+                     class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     placeholder="0" />
+            </div>
+
+            <div class="col-6">
+              <label class="form-label small text-white-50">Precio máx. (€)</label>
+              <input id="filterMax" type="number" min="0"
+                     class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     placeholder="200000" />
+            </div>
+          </div>
+
+          <div class="d-flex gap-2 pt-2">
+            <button id="applyFiltersBtn" type="button" class="btn cr-btn-gold w-100 rounded-4">Aplicar filtros</button>
+            <button id="clearFiltersBtn" type="button" class="btn cr-btn-outline w-100 rounded-4">Limpiar</button>
+          </div>
+
+          <p class="text-white-50 small mb-0">
+            * Los filtros se aplican en <strong>Colecciones</strong> y se guardan para tu sesión.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- OFFCANVAS CARRITO -->
+<div class="offcanvas offcanvas-end cr-offcanvas" id="cartOffcanvas" tabindex="-1">
+  <div class="offcanvas-header border-bottom border-secondary-subtle">
+    <h5 class="offcanvas-title cr-h3 m-0">Carrito</h5>
+    <button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column">
+
+    <!-- LISTA DE PRODUCTOS -->
+    <div class="flex-grow-1 overflow-auto pe-1">
+
+      <div *ngIf="cartItems.length === 0" class="text-center opacity-75 mt-5">
+        <p>Tu carrito está vacío</p>
+      </div>
+
+      <div *ngFor="let item of cartItems" class="d-flex gap-3 mb-4 pb-3 border-bottom border-secondary-subtle">
+
+        <!-- Imagen -->
+        <div class="rounded-3 overflow-hidden" style="width: 90px; height: 90px;">
+          <img [src]="item.product.images[0]" class="w-100 h-100 object-fit-cover">
+        </div>
+
+        <!-- Info -->
+        <div class="flex-grow-1">
+          <h6 class="mb-1">{{ item.product.name }}</h6>
+          <p class="text-secondary small mb-2">{{ item.product.brand }}</p>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-bold cr-gold">
+              {{ item.product.price }} €
+            </span>
+
+            <!-- Controles -->
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
+                      (click)="decrement(item.product.id)">−</button>
+
+              <span class="fw-semibold">{{ item.qty }}</span>
+
+              <button class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
+                      (click)="increment(item.product.id)">+</button>
+            </div>
+          </div>
+
+          <!-- Eliminar -->
+          <button class="btn btn-sm text-danger mt-2 px-0"
+                  (click)="remove(item.product.id)">
+            Eliminar
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TOTAL + BOTONES -->
+    <div class="mt-auto pt-3 border-top border-secondary-subtle">
+
+      <div class="d-flex justify-content-between mb-2">
+        <span class="text-secondary">Subtotal</span>
+        <span class="fw-semibold">
+          {{ cartTotal }} €
+        </span>
+      </div>
+
+      <div class="d-flex justify-content-between mb-3">
+        <span class="text-secondary">Total</span>
+        <span class="fw-semibold cr-gold">
+          {{ cartTotal }} €
+        </span>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn cr-btn-gold rounded-4"
+                data-bs-toggle="modal"
+                data-bs-target="#contactInquiryModal">
+          Solicitar consulta
+        </button>
+
+        <div class="d-flex gap-2">
+          <button class="btn cr-btn-outline w-100 rounded-4"
+                  (click)="clear()">
+            Vaciar carrito
+          </button>
+
+          <button class="btn cr-btn-gold w-100 rounded-4"
+                  (click)="goToColecciones()">
+            Seguir comprando
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- MODAL CONTACTAR -->
+<div class="modal fade" id="contactInquiryModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-black text-light border-0 shadow-lg rounded-4 fw-light">
+
+      <div class="modal-header border-0 pb-2">
+        <h5 class="modal-title text-uppercase fw-normal mb-0">
+          Solicitud de consulta
+        </h5>
+        <button class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button>
+      </div>
+
+      <hr class="border-white border-opacity-70 mt-1 mb-4" />
+
+      <form class="needs-validation" id="contactInquiryForm" novalidate>
+        <div class="modal-body pt-0">
+
+          <p class="text-white-50 small mb-4">
+            Completa tu solicitud y nuestro equipo se pondrá en contacto
+            para confirmar disponibilidad, estado, documentación y
+            condiciones de la pieza.
+          </p>
+
+          <div class="row g-3">
+
+            <!-- Nombre -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Nombre</label>
+              <input class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     type="text" required>
+            </div>
+
+            <!-- Apellidos -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Apellidos</label>
+              <input class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     type="text" required>
+            </div>
+
+            <!-- Email -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Correo electrónico</label>
+              <input class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     type="email" required>
+            </div>
+
+            <!-- Teléfono -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Teléfono</label>
+              <input class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     type="tel" placeholder="+34 600 000 000" required>
+            </div>
+
+            <!-- País -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">País</label>
+
+              <select id="paisSelect" class="d-none" required>
+                <option value="" selected>Selecciona un país</option>
+                <option value="España">España</option>
+                <option value="Portugal">Portugal</option>
+                <option value="Francia">Francia</option>
+                <option value="Italia">Italia</option>
+                <option value="Alemania">Alemania</option>
+              </select>
+
+              <div class="dropdown">
+                <button id="paisBtn"
+                        class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="dropdown"
+                        type="button">
+                  <span id="paisText">Selecciona un país</span>
+                  <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark w-100">
+                  <li><button class="dropdown-item" data-target="pais" data-value="España">España</button></li>
+                  <li><button class="dropdown-item" data-target="pais" data-value="Portugal">Portugal</button></li>
+                  <li><button class="dropdown-item" data-target="pais" data-value="Francia">Francia</button></li>
+                  <li><button class="dropdown-item" data-target="pais" data-value="Italia">Italia</button></li>
+                  <li><button class="dropdown-item" data-target="pais" data-value="Alemania">Alemania</button></li>
+                </ul>
+              </div>
+
+              <div class="invalid-feedback">Selecciona un país.</div>
+            </div>
+
+            <!-- Ciudad -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Ciudad</label>
+              <input class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+                     type="text" required>
+            </div>
+
+            <!-- Motivo -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Motivo del interés</label>
+
+              <select id="motivoSelect" class="d-none" required>
+                <option value="" selected>Selecciona una opción</option>
+                <option value="Compra">Compra</option>
+                <option value="Información adicional">Información adicional</option>
+                <option value="Disponibilidad / Reservas">Disponibilidad / Reservas</option>
+                <option value="Estado / Documentación">Estado / Documentación</option>
+              </select>
+
+              <div class="dropdown">
+                <button id="motivoBtn"
+                        class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="dropdown"
+                        type="button">
+                  <span id="motivoText">Selecciona una opción</span>
+                  <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark w-100">
+                  <li><button class="dropdown-item" data-target="motivo" data-value="Compra">Compra</button></li>
+                  <li><button class="dropdown-item" data-target="motivo" data-value="Información adicional">Información adicional</button></li>
+                  <li><button class="dropdown-item" data-target="motivo" data-value="Disponibilidad / Reservas">Disponibilidad / Reservas</button></li>
+                  <li><button class="dropdown-item" data-target="motivo" data-value="Estado / Documentación">Estado / Documentación</button></li>
+                </ul>
+              </div>
+
+              <div class="invalid-feedback">Selecciona un motivo.</div>
+            </div>
+
+            <!-- Horizonte -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Horizonte temporal</label>
+
+              <select id="horizonteSelect" class="d-none" required>
+                <option value="" selected>Selecciona una opción</option>
+                <option value="Inmediato">Inmediato</option>
+                <option value="1–2 semanas">1–2 semanas</option>
+                <option value="1 mes">1 mes</option>
+                <option value="Más adelante">Más adelante</option>
+              </select>
+
+              <div class="dropdown">
+                <button id="horizonteBtn"
+                        class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="dropdown"
+                        type="button">
+                  <span id="horizonteText">Selecciona una opción</span>
+                  <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark w-100">
+                  <li><button class="dropdown-item" data-target="horizonte" data-value="Inmediato">Inmediato</button></li>
+                  <li><button class="dropdown-item" data-target="horizonte" data-value="1–2 semanas">1–2 semanas</button></li>
+                  <li><button class="dropdown-item" data-target="horizonte" data-value="1 mes">1 mes</button></li>
+                  <li><button class="dropdown-item" data-target="horizonte" data-value="Más adelante">Más adelante</button></li>
+                </ul>
+              </div>
+
+              <div class="invalid-feedback">Selecciona un horizonte temporal.</div>
+            </div>
+
+            <!-- Experiencia -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">¿Ha adquirido anteriormente relojes de alta gama?</label>
+
+              <select id="experienciaSelect" class="d-none" required>
+                <option value="" selected>Prefiero no indicarlo</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+
+              <div class="dropdown">
+                <button id="experienciaBtn"
+                        class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="dropdown"
+                        type="button">
+                  <span id="experienciaText">Prefiero no indicarlo</span>
+                  <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark w-100">
+                  <li><button class="dropdown-item" data-target="experiencia" data-value="Sí">Sí</button></li>
+                  <li><button class="dropdown-item" data-target="experiencia" data-value="No">No</button></li>
+                </ul>
+              </div>
+
+              <div class="invalid-feedback">Selecciona una opción.</div>
+            </div>
+
+            <!-- Relación -->
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">¿Relación previa con nuestra boutique?</label>
+
+              <select id="relacionSelect" class="d-none" required>
+                <option value="" selected>Prefiero no indicarlo</option>
+                <option value="Sí">Sí</option>
+                <option value="No">No</option>
+              </select>
+
+              <div class="dropdown">
+                <button id="relacionBtn"
+                        class="form-control w-100 text-light bg-dark bg-opacity-25 border border-warning border-opacity-25 rounded-pill px-3 py-2 d-flex justify-content-between align-items-center"
+                        data-bs-toggle="dropdown"
+                        type="button">
+                  <span id="relacionText">Prefiero no indicarlo</span>
+                  <span class="pe-4"><i class="bi bi-chevron-down"></i></span>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-dark w-100">
+                  <li><button class="dropdown-item" data-target="relacion" data-value="Sí">Sí</button></li>
+                  <li><button class="dropdown-item" data-target="relacion" data-value="No">No</button></li>
+                </ul>
+              </div>
+
+              <div class="invalid-feedback">Selecciona una opción.</div>
+            </div>
+
+            <!-- Piezas seleccionadas -->
+            <div class="col-12 mt-2">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="fw-semibold">Piezas seleccionadas</div>
+                <div id="contactCartTotal" class="fw-semibold text-warning">€0</div>
+              </div>
+
+              <div id="contactCartSummary" class="bg-dark bg-opacity-25 rounded-4 p-2"></div>
+
+              <input id="contactCartHidden" type="hidden">
+
+              <div class="small text-white-50 mt-2">
+                * Estas piezas se añaden automáticamente desde tu carrito.
+              </div>
+            </div>
+
+            <!-- Comentarios -->
+            <div class="col-12">
+              <label class="form-label small text-white-50">Comentarios / Observaciones (opcional)</label>
+              <textarea class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-4 p-3"
+                        rows="3"
+                        placeholder="Disponibilidad, documentación, certificado, cita presencial, horario de contacto…"></textarea>
+            </div>
+
+            <!-- Legal -->
+            <div class="col-12">
+              <p class="small text-white-50 mb-0">
+                * Las solicitudes de consulta no constituyen una reserva ni un compromiso de compra.
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Marca abajo -->
+          <div class="d-flex justify-content-end align-items-center gap-2 mt-4">
+            <img src="assets/imgs/logo.png" width="26" height="26">
+            <div class="small text-white-50 text-uppercase">Chrono Royal</div>
+          </div>
+
+        </div>
+
+        <hr class="border-white border-opacity-70 mt-1 mb-3" />
+
+        <div class="modal-footer border-0 pt-0">
+          <button class="btn cr-btn-outline px-4 rounded-4" data-bs-dismiss="modal" type="button">
+            Cerrar
+          </button>
+          <button class="btn cr-btn-gold px-4 rounded-4" type="submit">
+            Enviar solicitud
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL LOGIN -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-black text-light border border-white border-opacity-25 shadow-lg rounded-4">
+      <div class="modal-header border-0 pb-2">
+        <h5 class="modal-title text-uppercase fw-semibold mb-0">Acceso</h5>
+        <button aria-label="Cerrar" class="btn-close btn-close-white" data-bs-dismiss="modal" type="button"></button>
+      </div>
+
+      <hr class="border-white border-opacity-70 mt-1 mb-4" />
+      <hr class="border-white border-opacity-25 m-0" />
+
+      <div class="modal-body pt-3">
+        <form class="vstack gap-3" id="loginForm">
+          <div>
+            <label class="form-label small text-white-50">Email / Usuario</label>
+            <input
+              class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+              id="loginEmail" placeholder="tu@email.com" type="text" />
+          </div>
+
+          <div>
+            <label class="form-label small text-white-50">Contraseña</label>
+            <input
+              class="form-control bg-dark bg-opacity-25 text-light border border-warning border-opacity-25 rounded-pill px-3"
+              id="loginPass" placeholder="••••••••" type="password" />
+          </div>
+
+          <button class="btn cr-btn-gold px-4 rounded-4" type="submit">
+            Iniciar sesión
+          </button>
+
+          <button class="btn cr-btn-outline w-100 rounded-4" id="logoutBtn" type="button">
+            Cerrar sesión
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- TOAST GLOBAL -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="globalToast" class="toast bg-black text-white shadow-lg rounded-4 border-0" role="alert">
+    <div class="toast-header bg-light text-dark border-0 rounded-top-4">
+      <strong class="me-auto">Chrono Royale</strong>
+      <small class="text-muted">Ahora</small>
+      <button class="btn-close" data-bs-dismiss="toast"></button>
+    </div>
+    <div id="globalToastBody" class="toast-body fw-semibold"></div>
+  </div>
+</div>
+
+
+<!-- TOAST PREMIUM -->
+<div id="consultToastBackdrop"
+     class="d-none position-fixed top-0 start-0 w-100 h-100 cr-consult-backdrop bg-black bg-opacity-75"></div>
+
+<div class="position-fixed top-50 start-50 translate-middle p-3 pe-none cr-consult-toast-wrap">
+  <div id="consultToast"
+       class="toast bg-dark text-light border border-secondary rounded-4 shadow-lg w-100 hide pe-auto"
+       role="alert">
+    <div class="toast-header bg-dark text-light border-0 pb-2">
+      <strong class="me-auto">Chrono Royale</strong>
+      <small class="text-secondary">Ahora</small>
+      <button class="btn-close btn-close-white ms-2" data-bs-dismiss="toast"></button>
+    </div>
+
+    <div class="toast-body pt-0">
+      <div id="consultToastBody" class="text-light lh-base"></div>
+
+      <div class="d-flex justify-content-end align-items-center gap-2 mt-3">
+        <img src="assets/imgs/logo.png" width="28" height="28" />
+        <span class="small text-secondary">CHRONO ROYAL</span>
+      </div>
+    </div>
+  </div>
+</div>

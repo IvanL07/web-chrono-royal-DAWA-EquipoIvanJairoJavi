@@ -1,1 +1,169 @@
-/* You can add global styles to this file, and also import other style files */
+/* Bootstrap ya está cargado desde angular.json */
+
+/* === TU CSS GLOBAL === */
+:root {
+  --cr-bg: #0b0b0d;
+  --cr-text: #f4f4f6;
+  --cr-muted: #a9a9b3;
+  --cr-gold: #d7b15a;
+  --cr-gold-2: #b88b2a;
+  --cr-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* Fondo + tipografía base */
+.cr-body {
+  background:
+    radial-gradient(1200px 800px at 15% 0%,
+    rgba(215, 177, 90, 0.08),
+    transparent 45%),
+    radial-gradient(1000px 700px at 85% 10%,
+    rgba(215, 177, 90, 0.06),
+    transparent 50%),
+    var(--cr-bg);
+  color: var(--cr-text);
+  font-family:
+    "Montserrat",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+/* Nav / offcanvas con blur */
+.cr-nav {
+  background: rgba(11, 11, 13, 0.78) !important;
+  backdrop-filter: blur(12px);
+}
+
+.cr-footer {
+  background-color: var(--cr-bg) !important;
+}
+
+.cr-offcanvas {
+  background: rgba(12, 12, 15, 0.98);
+  color: var(--cr-text);
+  border-left: 1px solid rgba(215, 177, 90, 0.18);
+}
+
+/* Tipografías de marca */
+.cr-brand-title,
+.cr-display,
+.cr-h2,
+.cr-h3,
+.cr-hero-title {
+  font-family: "Cinzel", serif;
+}
+
+.cr-brand-title {
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.cr-display {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(2rem, 3.4vw, 3.2rem);
+}
+
+.cr-h2 {
+  letter-spacing: 0.04em;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+}
+
+.cr-h3 {
+  letter-spacing: 0.04em;
+  font-size: 1.15rem;
+}
+
+/* Hero */
+.cr-hero-title {
+  letter-spacing: clamp(2px, 0.8vw, 5px);
+  font-size: clamp(1.4rem, 4.5vw, 2.7rem);
+  line-height: 1.1;
+}
+
+.cr-hero-img {
+  height: clamp(420px, 55vw, 720px);
+  filter: contrast(1.05) saturate(1.05);
+}
+
+/* Botones */
+.cr-btn-gold {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  border: none;
+  color: #0b0b0d;
+  font-weight: 700;
+}
+
+.cr-btn-gold:hover {
+  filter: brightness(1.03);
+  color: #0b0b0d;
+}
+
+.cr-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(215, 177, 90, 0.35);
+  color: rgba(244, 244, 246, 0.92);
+}
+
+.cr-btn-outline:hover {
+  border-color: rgba(215, 177, 90, 0.65);
+  color: var(--cr-gold);
+}
+
+/* Logo */
+.cr-logo {
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
+}
+
+/* Divisores */
+.cr-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+  transparent,
+  rgba(215, 177, 90, 0.35),
+  transparent);
+}
+
+.cr-divider-footer {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+}
+
+/* Utilidades */
+.cr-ratio-28 {
+  --bs-aspect-ratio: 28%;
+}
+
+.cr-minw-64 {
+  min-width: 64px;
+}
+
+.cr-minh-260 {
+  min-height: 260px;
+}
+
+/* Toast consulta */
+.cr-consult-backdrop {
+  z-index: 1089;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.cr-consult-toast-wrap {
+  z-index: 1090;
+  width: min(520px, 92vw);
+}
+
+/* Hover botón colecciones y eliminar producto modal carrito */
+.btn-link.text-warning:hover {
+  color: #b88b2a !important;
+}

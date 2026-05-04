@@ -1,0 +1,221 @@
+<main class="py-5">
+
+  <!-- HERO -->
+  <header>
+    <div class="container text-center mb-5">
+      <h1 class="cr-display">NUEVA COLECCIÓN</h1>
+      <p class="text-secondary mb-0">Timeless Prestige Collection</p>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <div class="container">
+    <div class="row g-4 align-items-stretch">
+
+      <!-- COLUMNA IZQUIERDA: PRODUCTOS -->
+      <div class="col-12 col-lg-4">
+        <div class="row g-4">
+
+          <!-- Tarjeta 1 -->
+          <div class="col-12">
+            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
+              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+                <img
+                  [src]="productos[1].images[0]"
+                  alt="{{ productos[1].name }}"
+                  class="w-100 h-100 object-fit-contain p-4">
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title text-light">{{ productos[0].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[0].brand }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold" style="color: var(--cr-gold);">
+                    {{ productos[0].price | currency:'EUR':'symbol':'1.0-0' }}
+                  </span>
+
+                  <a
+                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    [routerLink]="['/producto']"
+                    [queryParams]="{ id: productos[0].id }">
+                    Ver producto
+                  </a>
+                </div>
+
+                <button
+                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
+                  (click)="addToCart(productos[1])">
+                  Añadir al carrito
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 2 -->
+          <div class="col-12">
+            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
+              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+                <img
+                  [src]="productos[2].images[0]"
+                  alt="{{ productos[2].name }}"
+                  class="w-100 h-100 object-fit-contain p-4">
+              </div>
+
+
+              <div class="card-body">
+                <h5 class="card-title text-light">{{ productos[1].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[1].brand }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold" style="color: var(--cr-gold);">
+                    {{ productos[1].price | currency:'EUR':'symbol':'1.0-0' }}
+                  </span>
+
+                  <a
+                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    [routerLink]="['/producto']"
+                    [queryParams]="{ id: productos[1].id }">
+                    Ver producto
+                  </a>
+                </div>
+
+                <button
+                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
+                  (click)="addToCart(productos[2])">
+                  Añadir al carrito
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta 3 -->
+          <div class="col-12">
+            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
+              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+                <img
+                  [src]="productos[3].images[0]"
+                  alt="{{ productos[3].name }}"
+                  class="w-100 h-100 object-fit-contain p-4">
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title text-light">{{ productos[2].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[2].brand }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <span class="fw-bold" style="color: var(--cr-gold);">
+                    {{ productos[2].price | currency:'EUR':'symbol':'1.0-0' }}
+                  </span>
+
+                  <a
+                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    [routerLink]="['/producto']"
+                    [queryParams]="{ id: productos[2].id }">
+                    Ver producto
+                  </a>
+                </div>
+
+                <button
+                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
+                  (click)="addToCart(productos[2])">
+                  Añadir al carrito
+                </button>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: TEXTO + CARRUSEL -->
+      <div class="col-12 col-lg-8">
+        <div class="h-100 d-flex flex-column gap-4">
+
+          <!-- TEXTO -->
+          <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg">
+            <div class="card-body p-4 p-md-5 text-start">
+
+              <p class="mb-3 text-light opacity-75">
+                Rolex presenta la exclusiva colección "Timeless Prestige", una serie limitada que celebra lo mejor de la alta relojería con tres modelos del emblemático Cosmograph Daytona. Esta colección está dedicada a quienes buscan lo máximo en lujo, precisión y sofisticación. Cada reloj de esta serie ha sido meticulosamente diseñado para ofrecer una experiencia de lujo absoluto, combinado con las excepcionales complicaciones mecánicas por las que Rolex es mundialmente conocido. Hechos con materiales nobles como platino, oro blanco y oro Everose, estos relojes no solo son instrumentos de precisión, sino también auténticas joyas de la relojería.              </p>
+
+              <p class="mb-3 text-light opacity-75">
+                El Cosmograph Daytona ha sido sinónimo de rendimiento y elegancia desde su creación, y en esta colección se lleva al siguiente nivel. Cada modelo presenta una caja de Oyster de 40 mm, disponible en tres opciones de materiales diferentes que reflejan el lujo más exclusivo. Desde el platino resplandeciente hasta el oro rosa cálido, pasando por el oro blanco de 18 quilates, cada modelo de la colección "Timeless Prestige" es una pieza única que destaca en cualquier ocasión.              </p>
+
+              <p class="mb-3 text-light opacity-75">
+                El primer modelo, el Rolex Cosmograph Daytona en Platino (Referencia 126506), es una de las piezas más impresionantes de la colección. Con una caja de platino 950, este reloj presenta una esfera de color ice blue, que resalta con elegancia junto al bisel cerámico negro. Este reloj, cuyo precio alcanza los 82.900 €, es una pieza icónica que combina lujo, rendimiento y exclusividad en un solo reloj. Su movimiento automático calibre 4130 garantiza una precisión excepcional y una fiabilidad que es esencial para cualquier aficionado de la alta relojería.
+              </p>
+
+              <p class="mb-3 text-light opacity-75">
+                Por otro lado, el Rolex Cosmograph Daytona en Oro Blanco (Referencia 126509), con un precio de 55.200 €, destaca por su elegancia sobria. La caja de oro blanco de 18 quilates y la esfera negra del reloj ofrecen un contraste perfecto, creando una estética refinada y de lujo. Este modelo es ideal para aquellos que prefieren un reloj que se mantenga discreto pero mantenga una presencia poderosa. Al igual que sus compañeros de la colección, el calibre 4130 asegura que este reloj sea tan funcional como hermoso.
+              </p>
+
+              <p class="mb-3 text-light opacity-75">
+                Finalmente, el Rolex Cosmograph Daytona en Oro Everose (Referencia 126505) es el modelo que aporta un toque de calidez a la colección. Fabricado en oro Everose, una aleación exclusiva de Rolex, este reloj tiene una esfera de color negro que lo convierte en una pieza llamativa y sofisticada. Con un precio de 55.200 €, este modelo es perfecto para quienes buscan un reloj que combine la elegancia de un cronógrafo con la calidez única del oro rosa. Al igual que los otros modelos de la colección, este reloj está impulsado por el calibre 4130, garantizando una precisión inquebrantable.
+              </p>
+
+              <p class="mb-3 text-light opacity-75">
+                Cada uno de estos relojes de la colección "Timeless Prestige" ha sido diseñado con una atención meticulosa a los detalles. La caja Oyster de 40 mm de diámetro es un referente en términos de robustez y comodidad, mientras que el brazalete Oysterlock garantiza un ajuste seguro y cómodo. Además, cada modelo de la colección es una verdadera obra de arte, con una combinación de materiales finos y una precisión excepcional que hacen que cada reloj sea mucho más que una simple herramienta para medir el tiempo: son auténticas piezas de coleccionista que reflejan el prestigio y el lujo de Rolex.
+              </p>
+
+              <p class="mb-0 text-light opacity-75">
+                En resumen, la colección Rolex "Timeless Prestige" no es solo una serie de relojes, sino una declaración de lujo y elegancia atemporal. Con su mezcla perfecta de materiales nobles, complicaciones avanzadas y un diseño inconfundible, estos relojes representan lo mejor de la relojería suiza y se posicionan como una inversión exclusiva para aquellos que buscan lo mejor en todos los aspectos de la vida.
+              </p>
+
+            </div>
+          </div>
+
+          <!-- CARRUSEL -->
+          <div
+            id="nuevaColeccionCarousel"
+            class="carousel slide flex-grow-1"
+            data-bs-ride="carousel"
+            data-bs-interval="4000">
+
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#nuevaColeccionCarousel" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#nuevaColeccionCarousel" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#nuevaColeccionCarousel" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- Slides -->
+            <div class="carousel-inner h-100 rounded-4 overflow-hidden border border-secondary border-opacity-25 shadow-lg cr-minh-260">
+              <div class="carousel-item active h-100">
+                <img src="assets/imgs/carrusel-page-nueva-coleccion-1.png" class="d-block w-100 h-100 object-fit-cover" />
+              </div>
+              <div class="carousel-item h-100">
+                <img src="assets/imgs/carrusel-page-nueva-coleccion-2.png " class="d-block w-100 h-100 object-fit-cover" />
+              </div>
+              <div class="carousel-item h-100">
+                <img src="assets/imgs/carrusel-page-nueva-coleccion-3.png" class="d-block w-100 h-100 object-fit-cover" />
+              </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#nuevaColeccionCarousel" data-bs-slide="prev">
+              <span class="d-flex align-items-center justify-content-center rounded-circle p-1 p-lg-2 bg-dark bg-opacity-50">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              </span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#nuevaColeccionCarousel" data-bs-slide="next">
+            <span class="d-flex align-items-center justify-content-center rounded-circle p-1 p-lg-2 bg-dark bg-opacity-50">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              </span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>

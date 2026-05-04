@@ -1,0 +1,43 @@
+/* Fondo general de la página (gris oscuro) */
+:host {
+  display: block;
+  background: #111;
+  color: #fff;
+}
+
+/* Tarjeta premium (negro puro) */
+.cr-card {
+  background: #000;
+  border: 1px solid rgba(215, 177, 90, 0.25);
+  border-radius: 1rem;
+  transition: 0.3s ease;
+}
+
+.cr-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Imagen */
+.cr-card-img {
+  padding: 20px;
+}
+
+/* Precio dorado */
+.cr-price {
+  color: var(--cr-gold);
+}
+
+/* Botón dorado */
+.cr-btn-gold {
+  border: 1px solid var(--cr-gold);
+  color: var(--cr-gold);
+  background: transparent;
+  transition: 0.3s ease;
+}
+
+.cr-btn-gold:hover {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  color: #000;
+  border-color: transparent;
+}

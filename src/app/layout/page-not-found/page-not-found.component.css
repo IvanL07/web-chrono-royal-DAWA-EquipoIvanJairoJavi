@@ -1,0 +1,26 @@
+.bg-black {
+  background-color: var(--cr-bg) !important;
+}
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.cr-gold-text {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cr-btn-gold {
+  border: 1px solid var(--cr-gold);
+  color: var(--cr-gold);
+  background: transparent;
+  transition: 0.3s ease;
+}
+
+.cr-btn-gold:hover {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  color: #000;
+  border-color: transparent;
+}

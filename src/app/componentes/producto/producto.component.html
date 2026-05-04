@@ -1,0 +1,108 @@
+<div class="container py-5 text-light" *ngIf="producto">
+
+  <div class="row g-5 align-items-center">
+
+    <!-- IMAGEN IZQUIERDA -->
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <div class="ratio ratio-1x1 bg-black rounded-4 w-100 d-flex align-items-center justify-content-center">
+        <img
+          [src]="producto.images[0]"
+          [alt]="producto.name"
+          class="img-fluid object-fit-contain p-4"
+        />
+      </div>
+    </div>
+
+    <!-- INFORMACIÓN DERECHA -->
+    <div class="col-12 col-md-6">
+
+      <!-- Título -->
+      <h1 class="text-white text-uppercase fw-bold mb-1">
+        {{ producto.name }}
+      </h1>
+
+      <!-- Marca -->
+      <div class="text-secondary mb-3">
+        {{ producto.brand }}
+      </div>
+
+      <!-- PRECIO + BOTÓN AÑADIR AL CARRITO -->
+      <div class="d-flex align-items-center justify-content-between mb-4">
+
+        <!-- Precio grande -->
+        <div class="cr-price-big fw-bold">
+          {{ producto.price | currency:'EUR':'symbol':'1.0-0' }}
+        </div>
+
+        <!-- Botón añadir al carrito -->
+        <button
+          class="btn cr-btn-gold-inverted px-4 py-2 rounded-5"
+          (click)="addToCart()">
+          Añadir al carrito
+        </button>
+
+      </div>
+
+      <!-- Descripción -->
+      <h5 class="text-white fw-semibold mb-2">Descripción</h5>
+      <p class="text-secondary mb-4">
+        {{ producto.descripcion }}
+      </p>
+
+      <!-- ESPECIFICACIONES -->
+      <h5 class="text-white fw-semibold mb-3">Especificaciones</h5>
+
+      <ul class="list-group list-group-flush cr-spec-list mb-4">
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Material</span>
+          <span>{{ producto.material }}</span>
+        </li>
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Diámetro</span>
+          <span>{{ producto.diametro }}</span>
+        </li>
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Calibre</span>
+          <span>{{ producto.calibre }}</span>
+        </li>
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Reserva de marcha</span>
+          <span>{{ producto.reserva_marcha }}</span>
+        </li>
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Año</span>
+          <span>{{ producto.ano }}</span>
+        </li>
+
+        <li class="list-group-item bg-transparent text-light d-flex justify-content-between">
+          <span class="text-secondary">Categoría</span>
+          <span>{{ producto.categoria }}</span>
+        </li>
+
+      </ul>
+
+      <!-- BOTÓN SEGUIR COMPRANDO -->
+      <button
+        class="btn cr-btn-outline w-100 px-4 py-2 rounded-5"
+        (click)="seguirComprando()">
+        Seguir comprando
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Si no encuentra producto -->
+<div class="container py-5 text-light" *ngIf="!producto">
+  <h1 class="h4 mb-3">Producto no encontrado</h1>
+  <p class="text-secondary">
+    Este producto no existe o el enlace es incorrecto.
+  </p>
+</div>
