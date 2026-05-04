@@ -27,18 +27,18 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[0].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[0].brand }}</p>
+                <h5 class="card-title text-light">{{ productos[1].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[1].brand }}</p>
 
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[0].price | currency:'EUR':'symbol':'1.0-0' }}
+                    {{ productos[1].price | currency:'EUR':'symbol':'1.0-0' }}
                   </span>
 
                   <a
                     class="btn cr-btn-outline px-3 py-1 rounded-4"
                     [routerLink]="['/producto']"
-                    [queryParams]="{ id: productos[0].id }">
+                    [queryParams]="{ id: productos[1].id }">
                     Ver producto
                   </a>
                 </div>
@@ -65,18 +65,18 @@
 
 
               <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[1].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[1].brand }}</p>
+                <h5 class="card-title text-light">{{ productos[2].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[2].brand }}</p>
 
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[1].price | currency:'EUR':'symbol':'1.0-0' }}
+                    {{ productos[2].price | currency:'EUR':'symbol':'1.0-0' }}
                   </span>
 
                   <a
                     class="btn cr-btn-outline px-3 py-1 rounded-4"
                     [routerLink]="['/producto']"
-                    [queryParams]="{ id: productos[1].id }">
+                    [queryParams]="{ id: productos[2].id }">
                     Ver producto
                   </a>
                 </div>
@@ -102,25 +102,25 @@
               </div>
 
               <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[2].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[2].brand }}</p>
+                <h5 class="card-title text-light">{{ productos[3].name }}</h5>
+                <p class="card-text text-secondary">{{ productos[3].brand }}</p>
 
                 <div class="d-flex justify-content-between align-items-center">
                   <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[2].price | currency:'EUR':'symbol':'1.0-0' }}
+                    {{ productos[3].price | currency:'EUR':'symbol':'1.0-0' }}
                   </span>
 
                   <a
                     class="btn cr-btn-outline px-3 py-1 rounded-4"
                     [routerLink]="['/producto']"
-                    [queryParams]="{ id: productos[2].id }">
+                    [queryParams]="{ id: productos[3].id }">
                     Ver producto
                   </a>
                 </div>
 
                 <button
                   class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
-                  (click)="addToCart(productos[2])">
+                  (click)="addToCart(productos[3])">
                   Añadir al carrito
                 </button>
 
