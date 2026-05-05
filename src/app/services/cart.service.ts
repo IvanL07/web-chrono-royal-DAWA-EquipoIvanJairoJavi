@@ -13,16 +13,10 @@ export class CartService {
 
   private STORAGE_KEY = 'cr_cart';
 
-  // Lista cruda de items (id + qty)
   private cartSubject = new BehaviorSubject<CartItem[]>(this.getCart());
   cart$ = this.cartSubject.asObservable();
 
-  // Contador total (para el badge del navbar)
-  cartCount$ = new BehaviorSubject<number>(0);
-
-  constructor() {
-    this.cartCount$.next(this.countItems());
-  }
+  cartCount$ = new BehaviorSubject<number>(this.countItems());
 
   getCart(): CartItem[] {
     try {
@@ -40,17 +34,20 @@ export class CartService {
   }
 
   countItems(): number {
-    return this.getCart().reduce((acc, it) => acc + (it.qty || 0), 0);
+    return this.getCart().reduce((total, item) => total + item.qty, 0);
   }
 
   add(productId: string): void {
     const cart = this.getCart();
-    const found = cart.find(i => i.id === productId);
+    const item = cart.find(p => p.id === productId);
 
-    if (found) {
-      found.qty += 1;
+    if (item) {
+      item.qty++;
     } else {
-      cart.push({ id: productId, qty: 1 });
+      cart.push({
+        id: productId,
+        qty: 1
+      });
     }
 
     this.saveCart(cart);
@@ -58,34 +55,32 @@ export class CartService {
 
   increment(productId: string): void {
     const cart = this.getCart();
-    const item = cart.find(i => i.id === productId);
+    const item = cart.find(p => p.id === productId);
+
     if (!item) return;
 
-    item.qty += 1;
+    item.qty++;
     this.saveCart(cart);
   }
 
   decrement(productId: string): void {
     const cart = this.getCart();
-    const item = cart.find(i => i.id === productId);
-    if (!item) return;
-
-    item.qty = Math.max(1, item.qty - 1);
-    this.saveCart(cart);
-  }
-
-  setQty(productId: string, qty: number): void {
-    const cart = this.getCart();
-    const item = cart.find(i => i.id === productId);
+    const item = cart.find(p => p.id === productId);
 
     if (!item) return;
 
-    item.qty = Math.max(1, qty);
+    item.qty--;
+
+    if (item.qty <= 0) {
+      this.remove(productId);
+      return;
+    }
+
     this.saveCart(cart);
   }
 
   remove(productId: string): void {
-    const cart = this.getCart().filter(i => i.id !== productId);
+    const cart = this.getCart().filter(p => p.id !== productId);
     this.saveCart(cart);
   }
 

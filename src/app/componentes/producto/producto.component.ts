@@ -31,7 +31,9 @@ export class ProductoComponent implements OnInit {
     });
   }
 
-  addToCart() {
+  addToCart(): void {
+    if (!this.producto) return;
+
     this.cart.add(this.producto.id);
   }
 

@@ -4,11 +4,14 @@ import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
 import {FilterService} from '../../services/filter.service';
+import { CommonModule } from '@angular/common';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modals',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './modals.component.html',
   styleUrls: ['./modals.component.css']
 })
@@ -54,18 +57,25 @@ export class ModalsComponent implements OnInit {
   //   SINCRONIZAR CARRITO
   // =====================================================
   private syncCart(): void {
-    const raw = this.cartService.getCart();
+    const rawCart = this.cartService.getCart();
 
-    this.cartItems = raw.map(item => {
-      const product = this.allProducts.find(p => p.id === item.id);
-      return {
-        product,
-        qty: item.qty
-      };
-    });
+    this.cartItems = rawCart
+      .map(item => {
+        const product = this.allProducts.find(p => p.id === item.id);
+
+        if (!product) {
+          return null;
+        }
+
+        return {
+          product: product,
+          qty: item.qty
+        };
+      })
+      .filter(item => item !== null);
 
     this.cartTotal = this.cartItems.reduce(
-      (acc, it) => acc + it.product.price * it.qty,
+      (total, item) => total + item.product.price * item.qty,
       0
     );
   }

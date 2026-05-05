@@ -56,6 +56,8 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
   }
 
   addToCart(product: any): void {
+    if (!product) return;
+
     this.cart.add(product.id);
   }
 }

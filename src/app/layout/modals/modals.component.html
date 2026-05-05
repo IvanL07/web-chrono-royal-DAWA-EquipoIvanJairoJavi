@@ -91,36 +91,48 @@
 
       <div *ngFor="let item of cartItems" class="d-flex gap-3 mb-4 pb-3 border-bottom border-secondary-subtle">
 
-        <!-- Imagen -->
         <div class="rounded-3 overflow-hidden" style="width: 90px; height: 90px;">
-          <img [src]="item.product.images[0]" class="w-100 h-100 object-fit-cover">
+          <img
+            [src]="item.product.images[0]"
+            [alt]="item.product.name"
+            class="w-100 h-100 object-fit-cover">
         </div>
 
-        <!-- Info -->
         <div class="flex-grow-1">
           <h6 class="mb-1">{{ item.product.name }}</h6>
-          <p class="text-secondary small mb-2">{{ item.product.brand }}</p>
+
+          <p class="text-secondary small mb-2">
+            {{ item.product.brand }}
+          </p>
 
           <div class="d-flex justify-content-between align-items-center">
-            <span class="fw-bold cr-gold">
-              {{ item.product.price }} €
-            </span>
+      <span class="fw-bold cr-gold">
+        {{ item.product.price }} €
+      </span>
 
-            <!-- Controles -->
             <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
-                      (click)="decrement(item.product.id)">−</button>
+              <button
+                class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
+                type="button"
+                (click)="decrement(item.product.id)">
+                −
+              </button>
 
               <span class="fw-semibold">{{ item.qty }}</span>
 
-              <button class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
-                      (click)="increment(item.product.id)">+</button>
+              <button
+                class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
+                type="button"
+                (click)="increment(item.product.id)">
+                +
+              </button>
             </div>
           </div>
 
-          <!-- Eliminar -->
-          <button class="btn btn-sm text-danger mt-2 px-0"
-                  (click)="remove(item.product.id)">
+          <button
+            class="btn btn-sm text-danger mt-2 px-0"
+            type="button"
+            (click)="remove(item.product.id)">
             Eliminar
           </button>
         </div>
