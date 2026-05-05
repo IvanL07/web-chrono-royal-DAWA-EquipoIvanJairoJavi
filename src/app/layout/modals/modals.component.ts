@@ -3,6 +3,7 @@ import { SessionService } from '../../services/session.service';
 import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
+import {FilterService} from '../../services/filter.service';
 
 declare var bootstrap: any;
 
@@ -21,8 +22,9 @@ export class ModalsComponent implements OnInit {
     private session: SessionService,
     private cartService: CartService,
     private productService: ProductService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private filterService: FilterService
+) {}
 
   ngOnInit(): void {
     this.setupLoginForm();
@@ -402,6 +404,7 @@ export class ModalsComponent implements OnInit {
         sessionStorage.setItem('cr_filter_min',   min !== null ? String(min) : '');
         sessionStorage.setItem('cr_filter_max',   max !== null ? String(max) : '');
 
+        this.filterService.emitirAplicar();
         this.closeModal('filterModal');
         setTimeout(() => this.router.navigate(['/colecciones']), 200);
       });
@@ -426,9 +429,9 @@ export class ModalsComponent implements OnInit {
         const maxInput = document.getElementById('filterMax') as HTMLInputElement;
         if (minInput) minInput.value = '';
         if (maxInput) maxInput.value = '';
+        this.filterService.emitirAplicar();
 
-        this.closeModal('filterModal');
-        setTimeout(() => this.router.navigate(['/colecciones']), 200);
+
       });
     }
   }
