@@ -244,19 +244,70 @@ export class ModalsComponent implements OnInit {
   // =====================================================
   private setupLoginForm(): void {
     const form = document.getElementById('loginForm') as HTMLFormElement;
-    if (!form) return;
+    const loginBtn = document.getElementById('loginBtn') as HTMLButtonElement;
+    const registerBtn = document.getElementById('registerBtn') as HTMLButtonElement;
+
+    if (!form || !loginBtn || !registerBtn) return;
+
+    const getData = () => {
+      const email = (document.getElementById('loginEmail') as HTMLInputElement).value.trim();
+      const pass = (document.getElementById('loginPass') as HTMLInputElement).value.trim();
+
+      return { email, pass };
+    };
+
+    loginBtn.addEventListener('click', () => {
+      const { email, pass } = getData();
+
+      if (!email || !pass) {
+        alert('Debes escribir email y contraseña.');
+        return;
+      }
+
+      if (!this.session.userExists(email)) {
+        alert('Este correo no está registrado. Primero debes pulsar "Registrar usuario".');
+        return;
+      }
+
+      const ok = this.session.loginWithPassword(email, pass);
+
+      if (!ok) {
+        alert('La contraseña no es correcta.');
+        return;
+      }
+
+      alert('Sesión iniciada correctamente.');
+      this.closeModal('loginModal');
+      form.reset();
+    });
+
+    registerBtn.addEventListener('click', () => {
+      const { email, pass } = getData();
+
+      if (!email || !pass) {
+        alert('Debes escribir email y contraseña.');
+        return;
+      }
+
+      if (this.session.userExists(email)) {
+        alert('Este correo ya existe. No puedes registrarlo otra vez. Usa "Iniciar sesión".');
+        return;
+      }
+
+      const ok = this.session.register(email, pass);
+
+      if (!ok) {
+        alert('No se pudo registrar el usuario.');
+        return;
+      }
+
+      alert('Usuario registrado correctamente. Sesión iniciada.');
+      this.closeModal('loginModal');
+      form.reset();
+    });
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-
-      const email = (document.getElementById('loginEmail') as HTMLInputElement).value;
-      const pass = (document.getElementById('loginPass') as HTMLInputElement).value;
-
-      if (!email || !pass) return;
-
-      this.session.login(email);
-      this.closeModal('loginModal');
-      form.reset();
     });
   }
 
