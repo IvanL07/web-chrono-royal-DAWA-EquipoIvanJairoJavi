@@ -27,6 +27,7 @@ export class ModalsComponent implements OnInit {
   ngOnInit(): void {
     this.setupLoginForm();
     this.setupLogoutButton();
+    this.setupCustomDropdowns();
 
     // Limpieza SOLO al cerrar
     this.setupCartCleanup();
@@ -321,6 +322,96 @@ export class ModalsComponent implements OnInit {
     btn.addEventListener('click', () => {
       this.session.logout();
       this.closeModal('loginModal');
+    });
+  }
+  private setupCustomDropdowns(): void {
+    const dropdowns = [
+      {
+        btnId: 'paisBtn',
+        textId: 'paisText',
+        selectId: 'paisSelect',
+        target: 'pais'
+      },
+      {
+        btnId: 'motivoBtn',
+        textId: 'motivoText',
+        selectId: 'motivoSelect',
+        target: 'motivo'
+      },
+      {
+        btnId: 'horizonteBtn',
+        textId: 'horizonteText',
+        selectId: 'horizonteSelect',
+        target: 'horizonte'
+      },
+      {
+        btnId: 'experienciaBtn',
+        textId: 'experienciaText',
+        selectId: 'experienciaSelect',
+        target: 'experiencia'
+      },
+      {
+        btnId: 'relacionBtn',
+        textId: 'relacionText',
+        selectId: 'relacionSelect',
+        target: 'relacion'
+      },
+      {
+        btnId: 'filterBrandBtn',
+        textId: 'filterBrandText',
+        selectId: 'filterBrand',
+        target: 'filterBrand'
+      }
+    ];
+
+    dropdowns.forEach(drop => {
+      const btn = document.getElementById(drop.btnId) as HTMLButtonElement;
+      const text = document.getElementById(drop.textId) as HTMLElement;
+      const select = document.getElementById(drop.selectId) as HTMLSelectElement;
+
+      if (!btn || !text || !select) return;
+
+      const menu = btn.parentElement?.querySelector('.dropdown-menu') as HTMLElement;
+      if (!menu) return;
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
+          if (openMenu !== menu) {
+            openMenu.classList.remove('show');
+          }
+        });
+
+        menu.classList.toggle('show');
+      });
+
+      const items = menu.querySelectorAll('.dropdown-item');
+
+      items.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const button = item as HTMLButtonElement;
+          const value = button.getAttribute('data-value') || '';
+          const label = button.textContent?.trim() || '';
+
+          select.value = value;
+          text.textContent = label;
+
+          menu.classList.remove('show');
+
+          select.dispatchEvent(new Event('change'));
+        });
+      });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+        menu.classList.remove('show');
+      });
     });
   }
 }
