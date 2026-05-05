@@ -28,6 +28,7 @@ export class ModalsComponent implements OnInit {
     this.setupLoginForm();
     this.setupLogoutButton();
     this.setupCustomDropdowns();
+    this.setupFilters();           // ← AÑADIDO
 
     // Limpieza SOLO al cerrar
     this.setupCartCleanup();
@@ -140,7 +141,6 @@ export class ModalsComponent implements OnInit {
     const el = document.getElementById('cartOffcanvas');
     if (!el) return;
 
-    // ⭐ FORZAR BACKDROP AL ABRIR
     el.addEventListener('shown.bs.offcanvas', () => {
       let backdrop = document.querySelector('.offcanvas-backdrop');
 
@@ -154,12 +154,10 @@ export class ModalsComponent implements OnInit {
       document.body.style.overflow = 'hidden';
     });
 
-    // ⭐ LIMPIAR SIEMPRE AL CERRAR
     el.addEventListener('hidden.bs.offcanvas', () => {
       this.forceCartBackdropCleanup();
     });
 
-    // ⭐ LIMPIEZA EXTRA POR SI BOOTSTRAP FALLA
     el.addEventListener('hide.bs.offcanvas', () => {
       setTimeout(() => this.forceCartBackdropCleanup(), 200);
     });
@@ -253,7 +251,6 @@ export class ModalsComponent implements OnInit {
     const getData = () => {
       const email = (document.getElementById('loginEmail') as HTMLInputElement).value.trim();
       const pass = (document.getElementById('loginPass') as HTMLInputElement).value.trim();
-
       return { email, pass };
     };
 
@@ -324,49 +321,23 @@ export class ModalsComponent implements OnInit {
       this.closeModal('loginModal');
     });
   }
+
+  // =====================================================
+  //   DROPDOWNS PERSONALIZADOS
+  // =====================================================
   private setupCustomDropdowns(): void {
     const dropdowns = [
-      {
-        btnId: 'paisBtn',
-        textId: 'paisText',
-        selectId: 'paisSelect',
-        target: 'pais'
-      },
-      {
-        btnId: 'motivoBtn',
-        textId: 'motivoText',
-        selectId: 'motivoSelect',
-        target: 'motivo'
-      },
-      {
-        btnId: 'horizonteBtn',
-        textId: 'horizonteText',
-        selectId: 'horizonteSelect',
-        target: 'horizonte'
-      },
-      {
-        btnId: 'experienciaBtn',
-        textId: 'experienciaText',
-        selectId: 'experienciaSelect',
-        target: 'experiencia'
-      },
-      {
-        btnId: 'relacionBtn',
-        textId: 'relacionText',
-        selectId: 'relacionSelect',
-        target: 'relacion'
-      },
-      {
-        btnId: 'filterBrandBtn',
-        textId: 'filterBrandText',
-        selectId: 'filterBrand',
-        target: 'filterBrand'
-      }
+      { btnId: 'paisBtn',        textId: 'paisText',        selectId: 'paisSelect',        target: 'pais'        },
+      { btnId: 'motivoBtn',      textId: 'motivoText',      selectId: 'motivoSelect',      target: 'motivo'      },
+      { btnId: 'horizonteBtn',   textId: 'horizonteText',   selectId: 'horizonteSelect',   target: 'horizonte'   },
+      { btnId: 'experienciaBtn', textId: 'experienciaText', selectId: 'experienciaSelect', target: 'experiencia' },
+      { btnId: 'relacionBtn',    textId: 'relacionText',    selectId: 'relacionSelect',    target: 'relacion'    },
+      { btnId: 'filterBrandBtn', textId: 'filterBrandText', selectId: 'filterBrand',       target: 'filterBrand' }
     ];
 
     dropdowns.forEach(drop => {
-      const btn = document.getElementById(drop.btnId) as HTMLButtonElement;
-      const text = document.getElementById(drop.textId) as HTMLElement;
+      const btn    = document.getElementById(drop.btnId)    as HTMLButtonElement;
+      const text   = document.getElementById(drop.textId)   as HTMLElement;
       const select = document.getElementById(drop.selectId) as HTMLSelectElement;
 
       if (!btn || !text || !select) return;
@@ -379,30 +350,25 @@ export class ModalsComponent implements OnInit {
         e.stopPropagation();
 
         document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
-          if (openMenu !== menu) {
-            openMenu.classList.remove('show');
-          }
+          if (openMenu !== menu) openMenu.classList.remove('show');
         });
 
         menu.classList.toggle('show');
       });
 
-      const items = menu.querySelectorAll('.dropdown-item');
-
-      items.forEach(item => {
+      menu.querySelectorAll('.dropdown-item').forEach(item => {
         item.addEventListener('click', (e) => {
           e.preventDefault();
           e.stopPropagation();
 
           const button = item as HTMLButtonElement;
-          const value = button.getAttribute('data-value') || '';
-          const label = button.textContent?.trim() || '';
+          const value  = button.getAttribute('data-value') || '';
+          const label  = button.textContent?.trim() || '';
 
-          select.value = value;
+          select.value     = value;
           text.textContent = label;
 
           menu.classList.remove('show');
-
           select.dispatchEvent(new Event('change'));
         });
       });
@@ -414,4 +380,57 @@ export class ModalsComponent implements OnInit {
       });
     });
   }
+
+  // =====================================================
+  //   FILTROS — Aplicar y Limpiar
+  // =====================================================
+  private setupFilters(): void {
+    const applyBtn = document.getElementById('applyFiltersBtn');
+    const clearBtn = document.getElementById('clearFiltersBtn');
+
+    if (applyBtn) {
+      applyBtn.addEventListener('click', () => {
+        const brandSelect = document.getElementById('filterBrand') as HTMLSelectElement;
+        const minInput    = document.getElementById('filterMin')   as HTMLInputElement;
+        const maxInput    = document.getElementById('filterMax')   as HTMLInputElement;
+
+        const brand = brandSelect?.value || '';
+        const min   = minInput?.value    ? Number(minInput.value) : null;
+        const max   = maxInput?.value    ? Number(maxInput.value) : null;
+
+        sessionStorage.setItem('cr_filter_brand', brand);
+        sessionStorage.setItem('cr_filter_min',   min !== null ? String(min) : '');
+        sessionStorage.setItem('cr_filter_max',   max !== null ? String(max) : '');
+
+        this.closeModal('filterModal');
+        setTimeout(() => this.router.navigate(['/colecciones']), 200);
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        // Limpiar sessionStorage
+        sessionStorage.removeItem('cr_filter_brand');
+        sessionStorage.removeItem('cr_filter_min');
+        sessionStorage.removeItem('cr_filter_max');
+
+        // Resetear select y texto del dropdown de marca
+        const brandSelect = document.getElementById('filterBrand') as HTMLSelectElement;
+        if (brandSelect) brandSelect.value = '';
+
+        const brandText = document.getElementById('filterBrandText');
+        if (brandText) brandText.textContent = 'Todas';
+
+        // Resetear inputs de precio
+        const minInput = document.getElementById('filterMin') as HTMLInputElement;
+        const maxInput = document.getElementById('filterMax') as HTMLInputElement;
+        if (minInput) minInput.value = '';
+        if (maxInput) maxInput.value = '';
+
+        this.closeModal('filterModal');
+        setTimeout(() => this.router.navigate(['/colecciones']), 200);
+      });
+    }
+  }
+
 }
