@@ -167,3 +167,31 @@
 .btn-link.text-warning:hover {
   color: #b88b2a !important;
 }
+/* ── Superficie de tarjeta ── */
+.cr-surface {
+  background: rgba(18, 18, 23, 0.8);
+  border: 1px solid rgba(215, 177, 90, 0.14);
+  color: #f4f4f6;
+}
+
+/* ── Inputs del formulario ── */
+.cr-input {
+  background: rgba(17, 17, 20, 0.7) !important;
+  border: 1px solid rgba(215, 177, 90, 0.25) !important;
+  color: #f4f4f6 !important;
+  border-radius: 10px !important;
+}
+.cr-input:focus {
+  background: rgba(17, 17, 20, 0.9) !important;
+  border-color: rgba(215, 177, 90, 0.55) !important;
+  color: #f4f4f6 !important;
+  box-shadow: 0 0 0 0.2rem rgba(215, 177, 90, 0.12) !important;
+}
+
+/* ── Select del formulario ── */
+.cr-select {
+  background: rgba(17, 17, 20, 0.7) !important;
+  border: 1px solid rgba(215, 177, 90, 0.25) !important;
+  color: #f4f4f6 !important;
+  border-radius: 10px !important;
+}

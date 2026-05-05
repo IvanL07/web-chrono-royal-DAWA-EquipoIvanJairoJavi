@@ -1,1 +1,105 @@
-<p>contacto works!</p>
+<div class="py-4 px-3 px-lg-4">
+  <header class="mb-5">
+    <h1 class="cr-display">Contacto</h1>
+    <p class="text-secondary mb-0">Nuestro equipo de asesores está a tu disposición.</p>
+  </header>
+
+  <div class="row g-5">
+    <!-- Formulario -->
+    <div class="col-12 col-lg-7">
+      <div class="cr-surface rounded-4 p-4 p-md-5">
+        <h2 class="cr-h3 mb-4">Envíanos un mensaje</h2>
+
+        @if (enviado()) {
+          <div class="rounded-4 p-3 mb-4 text-center"
+               style="background:rgba(215,177,90,0.12);border:1px solid rgba(215,177,90,0.3)">
+            <i class="bi bi-check-circle-fill cr-gold me-2"></i>
+            <span class="cr-gold fw-semibold">Mensaje enviado. Nos pondremos en contacto contigo.</span>
+          </div>
+        }
+
+        <form (ngSubmit)="enviar()" class="vstack gap-3">
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Nombre</label>
+              <input type="text" class="form-control cr-input"
+                     [(ngModel)]="form.nombre" name="nombre" required>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Apellidos</label>
+              <input type="text" class="form-control cr-input"
+                     [(ngModel)]="form.apellidos" name="apellidos" required>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Correo electrónico</label>
+              <input type="email" class="form-control cr-input"
+                     [(ngModel)]="form.email" name="email" required>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Teléfono</label>
+              <input type="tel" class="form-control cr-input"
+                     [(ngModel)]="form.telefono" name="telefono" placeholder="+34 600 000 000">
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">País</label>
+              <select class="form-select cr-select"
+                      [(ngModel)]="form.pais" name="pais">
+                <option value="">Selecciona un país</option>
+                @for (pais of paises; track pais) {
+                  <option [value]="pais">{{ pais }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-12 col-md-6">
+              <label class="form-label small text-white-50">Ciudad</label>
+              <input type="text" class="form-control cr-input"
+                     [(ngModel)]="form.ciudad" name="ciudad">
+            </div>
+            <div class="col-12">
+              <label class="form-label small text-white-50">Motivo del contacto</label>
+              <select class="form-select cr-select"
+                      [(ngModel)]="form.motivo" name="motivo">
+                <option value="">Selecciona una opción</option>
+                @for (m of motivos; track m) {
+                  <option [value]="m">{{ m }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label small text-white-50">Mensaje</label>
+              <textarea class="form-control cr-input" rows="4"
+                        [(ngModel)]="form.mensaje" name="mensaje"
+                        placeholder="Cuéntanos qué necesitas..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn cr-btn-gold py-3">
+            <i class="bi bi-send me-2"></i>Enviar mensaje
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Información de contacto -->
+    <div class="col-12 col-lg-5">
+      <div class="cr-surface rounded-4 p-4 p-md-5">
+        <h2 class="cr-h3 mb-4">Nuestra boutique</h2>
+        <div class="vstack gap-4">
+          @for (info of [
+            {icon:'bi-geo-alt', title:'Dirección', text:'Paseo de la Castellana, 45\n28046 Madrid, España'},
+            {icon:'bi-telephone', title:'Teléfono', text:'+34 91 000 00 00'},
+            {icon:'bi-envelope', title:'Email', text:'info@chronoroyale.es'},
+            {icon:'bi-clock', title:'Horario', text:'Lun–Vie: 10h – 20h\nSáb: 11h – 18h'}
+          ]; track info.title) {
+            <div class="d-flex gap-3">
+              <i class="bi {{ info.icon }} cr-gold fs-5 mt-1 flex-shrink-0"></i>
+              <div>
+                <div class="fw-semibold mb-1">{{ info.title }}</div>
+                <div class="text-secondary small" style="white-space:pre-line">{{ info.text }}</div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
