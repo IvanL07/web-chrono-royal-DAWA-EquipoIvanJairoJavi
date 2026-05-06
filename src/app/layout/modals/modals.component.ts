@@ -5,13 +5,14 @@ import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
 import {FilterService} from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './modals.component.html',
   styleUrls: ['./modals.component.css']
 })
@@ -97,6 +98,17 @@ export class ModalsComponent implements OnInit {
 
   clear(): void {
     this.cartService.clear();
+  }
+
+  //========================================
+  //        METODO CARRITO EUR
+  //========================================
+
+  formatEUR(value: number): string {
+    return new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(value || 0);
   }
 
   // =====================================================

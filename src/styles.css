@@ -218,3 +218,60 @@
   color: #f4f4f6 !important;
   border-radius: 10px !important;
 }
+
+/* =========================================
+   CARRITO EXACTO HTML ORIGINAL
+========================================= */
+
+.cr-offcanvas {
+  background: rgba(12, 12, 15, 0.98);
+  color: var(--cr-text);
+  border-left: 1px solid rgba(215, 177, 90, 0.18);
+}
+
+.cr-gold {
+  color: var(--cr-gold);
+}
+
+.cr-link-gold {
+  color: var(--cr-gold) !important;
+  text-decoration: none !important;
+}
+
+.cr-link-gold:hover {
+  color: var(--cr-gold-2) !important;
+}
+
+.cr-btn-gold {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  border: none;
+  color: #0b0b0d;
+  font-weight: 700;
+  border-radius: 16px;
+}
+
+.cr-btn-gold:hover {
+  filter: brightness(1.03);
+  color: #0b0b0d;
+}
+
+.cr-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(215, 177, 90, 0.35);
+  color: rgba(244, 244, 246, 0.92);
+  border-radius: 16px;
+}
+
+.cr-btn-outline:hover {
+  border-color: rgba(215, 177, 90, 0.65);
+  color: var(--cr-gold);
+}
+
+/* Esto evita que Bootstrap ponga Eliminar azul */
+#cartOffcanvas .btn-link.cr-link-gold {
+  color: var(--cr-gold) !important;
+}
+
+#cartOffcanvas .btn-link.cr-link-gold:hover {
+  color: var(--cr-gold-2) !important;
+}
