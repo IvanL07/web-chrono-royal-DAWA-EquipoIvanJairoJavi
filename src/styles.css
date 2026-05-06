@@ -218,3 +218,112 @@
   color: #f4f4f6 !important;
   border-radius: 10px !important;
 }
+
+/* =========================================
+   CARRITO EXACTO HTML ORIGINAL
+========================================= */
+
+.cr-offcanvas {
+  background: rgba(12, 12, 15, 0.98);
+  color: var(--cr-text);
+  border-left: 1px solid rgba(215, 177, 90, 0.18);
+}
+
+.cr-gold {
+  color: var(--cr-gold);
+}
+
+.cr-link-gold {
+  color: var(--cr-gold) !important;
+  text-decoration: none !important;
+}
+
+.cr-link-gold:hover {
+  color: var(--cr-gold-2) !important;
+}
+
+.cr-btn-gold {
+  background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
+  border: none;
+  color: #0b0b0d;
+  font-weight: 700;
+  border-radius: 16px;
+}
+
+.cr-btn-gold:hover {
+  filter: brightness(1.03);
+  color: #0b0b0d;
+}
+
+.cr-btn-outline {
+  background: transparent;
+  border: 1px solid rgba(215, 177, 90, 0.35);
+  color: rgba(244, 244, 246, 0.92);
+  border-radius: 16px;
+}
+
+.cr-btn-outline:hover {
+  border-color: rgba(215, 177, 90, 0.65);
+  color: var(--cr-gold);
+}
+
+/* Esto evita que Bootstrap ponga Eliminar azul */
+#cartOffcanvas .btn-link.cr-link-gold {
+  color: var(--cr-gold) !important;
+}
+
+#cartOffcanvas .btn-link.cr-link-gold:hover {
+  color: var(--cr-gold-2) !important;
+}
+
+/* =========================================
+   VALIDACIÓN MODAL SOLICITAR CONSULTA
+========================================= */
+
+#contactInquiryForm.was-validated .form-control:invalid,
+#contactInquiryForm.was-validated .form-select:invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25) !important;
+}
+
+#contactInquiryForm.was-validated .form-control:valid,
+#contactInquiryForm.was-validated .form-select:valid {
+  border-color: rgba(215, 177, 90, .45) !important;
+  box-shadow: none !important;
+}
+
+/* Botones visibles de los dropdowns personalizados */
+#contactInquiryForm .dropdown button.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25) !important;
+}
+
+#contactInquiryForm .dropdown button.is-valid {
+  border-color: rgba(215, 177, 90, .45) !important;
+  box-shadow: none !important;
+}
+
+/* Mensajes de error como Bootstrap */
+#contactInquiryForm.was-validated .invalid-feedback {
+  display: block;
+}
+
+/* Caja de piezas seleccionadas igual que HTML */
+#contactCartSummary {
+  min-height: 48px;
+  overflow: hidden;
+}
+
+#contactCartSummary > div:last-child {
+  border-bottom: 0 !important;
+}
+
+/* Toast premium centrado */
+.cr-consult-backdrop {
+  z-index: 1080;
+}
+
+.cr-consult-toast-wrap {
+  z-index: 1090;
+  width: min(520px, calc(100% - 32px));
+}

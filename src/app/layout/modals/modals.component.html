@@ -74,110 +74,144 @@
 
 
 <!-- OFFCANVAS CARRITO -->
-<div class="offcanvas offcanvas-end cr-offcanvas" id="cartOffcanvas" tabindex="-1">
+<!-- OFFCANVAS CARRITO -->
+<div
+  class="offcanvas offcanvas-end cr-offcanvas"
+  tabindex="-1"
+  id="cartOffcanvas"
+  aria-labelledby="cartOffcanvasLabel"
+  style="z-index: 1045"
+>
   <div class="offcanvas-header border-bottom border-secondary-subtle">
-    <h5 class="offcanvas-title cr-h3 m-0">Carrito</h5>
-    <button class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    <h5 class="offcanvas-title cr-h3 m-0" id="cartOffcanvasLabel">
+      Carrito
+    </h5>
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+      aria-label="Cerrar"
+    ></button>
   </div>
 
   <div class="offcanvas-body d-flex flex-column">
 
-    <!-- LISTA DE PRODUCTOS -->
-    <div class="flex-grow-1 overflow-auto pe-1">
+    <div class="vstack">
 
-      <div *ngIf="cartItems.length === 0" class="text-center opacity-75 mt-5">
-        <p>Tu carrito está vacío</p>
+      <div class="small text-secondary mb-3">
+        <i class="bi bi-info-circle me-1"></i>
+        Debido al valor y la exclusividad de nuestras piezas de alta joyería, la
+        adquisición se gestiona mediante una consulta previa y personalizada para
+        confirmar disponibilidad, estado, documentación y condiciones de entrega.
+        Añade las piezas de tu interés al carrito y envíanos tu solicitud.
       </div>
 
-      <div *ngFor="let item of cartItems" class="d-flex gap-3 mb-4 pb-3 border-bottom border-secondary-subtle">
-
-        <div class="rounded-3 overflow-hidden" style="width: 90px; height: 90px;">
-          <img
-            [src]="item.product.images[0]"
-            [alt]="item.product.name"
-            class="w-100 h-100 object-fit-cover">
+      <div *ngIf="cartItems.length === 0" class="text-secondary">
+        Tu carrito está vacío.
+        <div class="mt-2 small">
+          Añade piezas desde
+          <a
+            class="cr-link-gold"
+            routerLink="/colecciones"
+            data-bs-dismiss="offcanvas">
+            Colecciones
+          </a>.
         </div>
+      </div>
+
+      <div
+        *ngFor="let item of cartItems"
+        class="d-flex gap-3 align-items-start mb-3"
+      >
+        <img
+          [src]="item.product.images[0]"
+          [alt]="item.product.name"
+          style="width:72px;height:72px;object-fit:cover;border-radius:14px;border:1px solid rgba(215,177,90,.18)"
+        >
 
         <div class="flex-grow-1">
-          <h6 class="mb-1">{{ item.product.name }}</h6>
+          <div class="fw-semibold">{{ item.product.name }}</div>
+          <div class="text-secondary small">{{ item.product.brand }}</div>
 
-          <p class="text-secondary small mb-2">
-            {{ item.product.brand }}
-          </p>
-
-          <div class="d-flex justify-content-between align-items-center">
-      <span class="fw-bold cr-gold">
-        {{ item.product.price }} €
-      </span>
-
-            <div class="d-flex align-items-center gap-2">
-              <button
-                class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
-                type="button"
-                (click)="decrement(item.product.id)">
-                −
-              </button>
-
-              <span class="fw-semibold">{{ item.qty }}</span>
-
-              <button
-                class="btn btn-sm btn-outline-light px-2 py-1 rounded-3"
-                type="button"
-                (click)="increment(item.product.id)">
-                +
-              </button>
-            </div>
+          <div class="mt-1 fw-semibold cr-gold">
+            {{ formatEUR(item.product.price) }}
           </div>
 
-          <button
-            class="btn btn-sm text-danger mt-2 px-0"
-            type="button"
-            (click)="remove(item.product.id)">
-            Eliminar
-          </button>
-        </div>
+          <div class="d-flex align-items-center gap-2 mt-2">
+            <button
+              class="btn btn-sm cr-btn-outline"
+              type="button"
+              aria-label="Restar"
+              (click)="decrement(item.product.id)">
+              −
+            </button>
 
+            <span class="text-secondary small">Cant.</span>
+
+            <span class="fw-semibold">
+              {{ item.qty }}
+            </span>
+
+            <button
+              class="btn btn-sm cr-btn-outline"
+              type="button"
+              aria-label="Sumar"
+              (click)="increment(item.product.id)">
+              +
+            </button>
+
+            <button
+              class="btn btn-sm btn-link ms-auto cr-link-gold p-0"
+              type="button"
+              (click)="remove(item.product.id)">
+              Eliminar
+            </button>
+          </div>
+        </div>
       </div>
 
     </div>
 
-    <!-- TOTAL + BOTONES -->
     <div class="mt-auto pt-3 border-top border-secondary-subtle">
-
       <div class="d-flex justify-content-between mb-2">
         <span class="text-secondary">Subtotal</span>
-        <span class="fw-semibold">
-          {{ cartTotal }} €
-        </span>
+        <span class="fw-semibold">{{ formatEUR(cartTotal) }}</span>
       </div>
 
       <div class="d-flex justify-content-between mb-3">
         <span class="text-secondary">Total</span>
-        <span class="fw-semibold cr-gold">
-          {{ cartTotal }} €
-        </span>
+        <span class="fw-semibold cr-gold">{{ formatEUR(cartTotal) }}</span>
       </div>
 
       <div class="d-grid gap-2">
-        <button class="btn cr-btn-gold rounded-4"
-                data-bs-toggle="modal"
-                data-bs-target="#contactInquiryModal">
+        <button
+          class="btn cr-btn-gold"
+          id="contactInquiryBtn"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#contactInquiryModal"
+          [disabled]="cartItems.length === 0"
+          [attr.aria-disabled]="cartItems.length === 0">
           Solicitar consulta
         </button>
 
         <div class="d-flex gap-2">
-          <button class="btn cr-btn-outline w-100 rounded-4"
-                  (click)="clear()">
+          <button
+            class="btn cr-btn-outline w-100"
+            type="button"
+            (click)="clear()">
             Vaciar carrito
           </button>
 
-          <button class="btn cr-btn-gold w-100 rounded-4"
-                  (click)="goToColecciones()">
+          <button
+            class="btn cr-btn-gold w-100"
+            type="button"
+            (click)="goToColecciones()">
             Seguir comprando
           </button>
         </div>
       </div>
-
     </div>
 
   </div>

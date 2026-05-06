@@ -5,13 +5,14 @@ import { ProductService } from '../../services/product.service';
 import { Router } from '@angular/router';
 import {FilterService} from '../../services/filter.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-modals',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './modals.component.html',
   styleUrls: ['./modals.component.css']
 })
@@ -39,6 +40,7 @@ export class ModalsComponent implements OnInit {
     this.setupCartCleanup();
     this.setupFilterModalCleanup();
     this.setupContactModalCleanup();
+    this.setupContactInquiryForm();
     this.setupLoginModalCleanup();
 
     // Cargar productos primero
@@ -97,6 +99,17 @@ export class ModalsComponent implements OnInit {
 
   clear(): void {
     this.cartService.clear();
+  }
+
+  //========================================
+  //        METODO CARRITO EUR
+  //========================================
+
+  formatEUR(value: number): string {
+    return new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(value || 0);
   }
 
   // =====================================================
@@ -377,11 +390,14 @@ export class ModalsComponent implements OnInit {
           const value  = button.getAttribute('data-value') || '';
           const label  = button.textContent?.trim() || '';
 
-          select.value     = value;
+          select.value = value;
           text.textContent = label;
 
+          btn.classList.remove('is-invalid');
+          btn.classList.toggle('is-valid', select.checkValidity());
+
           menu.classList.remove('show');
-          select.dispatchEvent(new Event('change'));
+          select.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });
     });
@@ -444,6 +460,190 @@ export class ModalsComponent implements OnInit {
 
       });
     }
+  }
+
+  // =====================================================
+//   MODAL SOLICITAR CONSULTA — CLON HTML ORIGINAL
+// =====================================================
+  private setupContactInquiryForm(): void {
+    const modalEl = document.getElementById('contactInquiryModal');
+    const formEl = document.getElementById('contactInquiryForm') as HTMLFormElement;
+    const listEl = document.getElementById('contactCartSummary');
+    const totalEl = document.getElementById('contactCartTotal');
+    const hiddenEl = document.getElementById('contactCartHidden') as HTMLInputElement;
+
+    if (!modalEl || !formEl || !listEl || !totalEl || !hiddenEl) return;
+
+    modalEl.addEventListener('show.bs.modal', () => {
+      this.fillContactCartSummary(listEl, totalEl, hiddenEl);
+      this.resetContactValidation(formEl);
+    });
+
+    formEl.addEventListener('submit', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      this.validateHiddenDropdowns(formEl);
+
+      if (!formEl.checkValidity()) {
+        formEl.classList.add('was-validated');
+        return;
+      }
+
+      formEl.classList.add('was-validated');
+
+      const modal =
+        bootstrap.Modal.getInstance(modalEl) ||
+        new bootstrap.Modal(modalEl);
+
+      modal.hide();
+
+      this.showConsultToast(
+        'Solicitud enviada correctamente. Nuestro equipo revisará la disponibilidad de las piezas seleccionadas y se pondrá en contacto a la mayor brevedad posible.'
+      );
+
+      this.clear();
+
+      setTimeout(() => {
+        formEl.reset();
+        formEl.classList.remove('was-validated');
+        this.resetContactDropdownTexts();
+        this.cleanBackdrops();
+      }, 300);
+    });
+  }
+
+// =====================================================
+//   RELLENAR PIEZAS SELECCIONADAS EN EL FORMULARIO
+// =====================================================
+  private fillContactCartSummary(
+    listEl: HTMLElement,
+    totalEl: HTMLElement,
+    hiddenEl: HTMLInputElement
+  ): void {
+    if (this.cartItems.length === 0) {
+      listEl.innerHTML = `
+      <div class="text-secondary small p-2">
+        No hay productos en el carrito.
+      </div>
+    `;
+
+      totalEl.textContent = this.formatEUR(0);
+      hiddenEl.value = '';
+      return;
+    }
+
+    listEl.innerHTML = this.cartItems.map(item => `
+    <div class="bg-transparent text-light d-flex justify-content-between align-items-start gap-3 p-2 border-bottom border-white border-opacity-10">
+      <div>
+        <div class="fw-semibold">${item.product.name}</div>
+        <div class="small text-secondary">${item.product.brand}</div>
+        <div class="small text-secondary">Cantidad: ${item.qty}</div>
+      </div>
+
+      <div class="fw-semibold">
+        ${this.formatEUR(item.product.price * item.qty)}
+      </div>
+    </div>
+  `).join('');
+
+    totalEl.textContent = this.formatEUR(this.cartTotal);
+
+    hiddenEl.value = this.cartItems.map(item =>
+      `${item.product.name} (${item.product.brand}) x${item.qty} — ${this.formatEUR(item.product.price * item.qty)}`
+    ).join(' | ');
+  }
+
+// =====================================================
+//   VALIDAR SELECTS OCULTOS DE LOS DROPDOWNS
+// =====================================================
+  private validateHiddenDropdowns(formEl: HTMLFormElement): void {
+    const selects = formEl.querySelectorAll('select[id$="Select"]');
+
+    selects.forEach(selectElement => {
+      const select = selectElement as HTMLSelectElement;
+      const base = select.id.replace('Select', '');
+      const btn = document.getElementById(base + 'Btn');
+
+      if (!btn) return;
+
+      const isValid = select.checkValidity();
+
+      btn.classList.toggle('is-valid', isValid);
+      btn.classList.toggle('is-invalid', !isValid);
+    });
+  }
+
+// =====================================================
+//   RESET VALIDACIÓN
+// =====================================================
+  private resetContactValidation(formEl: HTMLFormElement): void {
+    formEl.classList.remove('was-validated');
+
+    const buttons = formEl.querySelectorAll('.is-valid, .is-invalid');
+
+    buttons.forEach(btn => {
+      btn.classList.remove('is-valid');
+      btn.classList.remove('is-invalid');
+    });
+  }
+
+// =====================================================
+//   RESET TEXTOS DROPDOWNS FORMULARIO CONSULTA
+// =====================================================
+  private resetContactDropdownTexts(): void {
+    const resetData = [
+      { selectId: 'paisSelect', textId: 'paisText', text: 'Selecciona un país' },
+      { selectId: 'motivoSelect', textId: 'motivoText', text: 'Selecciona una opción' },
+      { selectId: 'horizonteSelect', textId: 'horizonteText', text: 'Selecciona una opción' },
+      { selectId: 'experienciaSelect', textId: 'experienciaText', text: 'Prefiero no indicarlo' },
+      { selectId: 'relacionSelect', textId: 'relacionText', text: 'Prefiero no indicarlo' }
+    ];
+
+    resetData.forEach(item => {
+      const select = document.getElementById(item.selectId) as HTMLSelectElement;
+      const text = document.getElementById(item.textId);
+
+      if (select) select.selectedIndex = 0;
+      if (text) text.textContent = item.text;
+    });
+  }
+
+// =====================================================
+//   TOAST PREMIUM ORIGINAL
+// =====================================================
+  private showConsultToast(message: string): void {
+    const backdrop = document.getElementById('consultToastBackdrop');
+    const toastEl = document.getElementById('consultToast');
+    const bodyEl = document.getElementById('consultToastBody');
+
+    if (!toastEl || !bodyEl) {
+      alert(message);
+      return;
+    }
+
+    bodyEl.textContent = message;
+
+    if (backdrop) {
+      backdrop.classList.remove('d-none');
+    }
+
+    const toast = new bootstrap.Toast(toastEl, {
+      autohide: true,
+      delay: 4500
+    });
+
+    toast.show();
+
+    toastEl.addEventListener(
+      'hidden.bs.toast',
+      () => {
+        if (backdrop) {
+          backdrop.classList.add('d-none');
+        }
+      },
+      { once: true }
+    );
   }
 
 }
