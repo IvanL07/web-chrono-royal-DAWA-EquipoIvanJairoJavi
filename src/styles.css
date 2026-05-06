@@ -275,3 +275,55 @@
 #cartOffcanvas .btn-link.cr-link-gold:hover {
   color: var(--cr-gold-2) !important;
 }
+
+/* =========================================
+   VALIDACIÓN MODAL SOLICITAR CONSULTA
+========================================= */
+
+#contactInquiryForm.was-validated .form-control:invalid,
+#contactInquiryForm.was-validated .form-select:invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25) !important;
+}
+
+#contactInquiryForm.was-validated .form-control:valid,
+#contactInquiryForm.was-validated .form-select:valid {
+  border-color: rgba(215, 177, 90, .45) !important;
+  box-shadow: none !important;
+}
+
+/* Botones visibles de los dropdowns personalizados */
+#contactInquiryForm .dropdown button.is-invalid {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25) !important;
+}
+
+#contactInquiryForm .dropdown button.is-valid {
+  border-color: rgba(215, 177, 90, .45) !important;
+  box-shadow: none !important;
+}
+
+/* Mensajes de error como Bootstrap */
+#contactInquiryForm.was-validated .invalid-feedback {
+  display: block;
+}
+
+/* Caja de piezas seleccionadas igual que HTML */
+#contactCartSummary {
+  min-height: 48px;
+  overflow: hidden;
+}
+
+#contactCartSummary > div:last-child {
+  border-bottom: 0 !important;
+}
+
+/* Toast premium centrado */
+.cr-consult-backdrop {
+  z-index: 1080;
+}
+
+.cr-consult-toast-wrap {
+  z-index: 1090;
+  width: min(520px, calc(100% - 32px));
+}
