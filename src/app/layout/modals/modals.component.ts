@@ -394,7 +394,16 @@ export class ModalsComponent implements OnInit {
           text.textContent = label;
 
           btn.classList.remove('is-invalid');
-          btn.classList.toggle('is-valid', select.checkValidity());
+
+          /* FIX:
+             En el modal de la lupa NO queremos tick verde.
+             Solo usamos is-valid en Solicitar consulta.
+          */
+          if (!btn.closest('#filterModal')) {
+            btn.classList.toggle('is-valid', select.checkValidity());
+          } else {
+            btn.classList.remove('is-valid');
+          }
 
           menu.classList.remove('show');
           select.dispatchEvent(new Event('change', { bubbles: true }));

@@ -2,72 +2,73 @@
 <nav class="navbar navbar-expand-lg navbar-dark cr-nav sticky-top border-bottom border-secondary-subtle">
   <div class="container py-2">
 
-    <!-- Hamburguesa (izquierda) -->
-    <button class="navbar-toggler d-lg-none p-2 order-0"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#mobileNavOffcanvas"
-            aria-controls="mobileNavOffcanvas"
-            aria-label="Abrir menú">
+    <!-- Hamburguesa móvil -->
+    <button
+      class="navbar-toggler d-lg-none p-1 order-0 cr-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#mobileNavOffcanvas"
+      aria-controls="mobileNavOffcanvas"
+      aria-label="Abrir menú">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Marca (centro en móvil: SOLO LOGO) -->
-    <a class="navbar-brand d-flex d-lg-none align-items-center justify-content-center flex-grow-1 m-0 order-1"
-       routerLink="/"
-       aria-label="Inicio">
-      <img src="assets/imgs/logo.png" alt="Chrono Royale" width="80" height="80" class="cr-logo" />
+    <!-- Marca móvil -->
+    <a
+      class="navbar-brand d-flex d-lg-none align-items-center gap-2 m-0 mx-2 order-1 flex-grow-1 justify-content-center cr-brand-mobile"
+      routerLink="/"
+      aria-label="Inicio">
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo cr-logo--mobile" />
+      <span class="cr-brand-title cr-brand-title--mobile text-nowrap text-truncate d-inline-block">
+        CHRONO ROYAL
+      </span>
     </a>
 
-    <!-- Iconos (derecha) -->
-    <div class="d-flex align-items-center gap-3 order-2">
+    <!-- Iconos derecha -->
+    <div class="d-flex align-items-center gap-2 ms-auto order-2 cr-actions">
 
       <!-- Lupa -->
-      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center"
-              type="button"
-              aria-label="Buscar / Filtrar"
-              data-bs-toggle="modal"
-              data-bs-target="#filterModal">
-        <i class="bi bi-search fs-5"></i>
+      <button
+        class="btn cr-icon-btn"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#filterModal"
+        aria-label="Buscar / Filtrar">
+        <i class="bi bi-search"></i>
       </button>
 
-      <!-- Login -->
-      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center"
-              type="button"
-              aria-label="Acceso"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal">
-
-        <i class="bi bi-person fs-5"></i>
-
-        <!-- ESTADO DE SESIÓN -->
-        <span *ngIf="isLogged" class="ms-2 small text-warning">
-          {{ userEmail }}
-        </span>
+      <!-- Usuario -->
+      <button
+        class="btn cr-icon-btn"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#loginModal"
+        aria-label="Usuario / Login">
+        <i class="bi bi-person"></i>
       </button>
 
       <!-- Carrito -->
-      <button class="btn border border-warning border-opacity-25 bg-dark bg-opacity-50 text-light rounded-3 p-2 d-flex align-items-center justify-content-center position-relative"
-              type="button"
-              aria-label="Carrito"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#cartOffcanvas"
-              aria-controls="cartOffcanvas">
+      <button
+        class="btn cr-icon-btn position-relative"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#cartOffcanvas"
+        aria-controls="cartOffcanvas"
+        aria-label="Carrito">
+        <i class="bi bi-bag"></i>
 
-        <i class="bi bi-bag fs-5"></i>
-
-        <!-- BADGE DEL CARRITO -->
-        <span *ngIf="cartCount > 0"
-              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+        <span
+          *ngIf="cartCount > 0"
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill cr-badge">
           {{ cartCount }}
         </span>
       </button>
 
     </div>
 
-    <!-- Marca CHR para PC -->
+    <!-- Marca PC -->
     <a class="navbar-brand d-none d-lg-flex align-items-center gap-2 order-lg-0" routerLink="/">
-      <img src="assets/imgs/logo.png" alt="Chrono Royale" width="60" height="60" class="cr-logo" />
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo" />
       <span class="cr-brand-title">CHRONO ROYAL</span>
     </a>
 
@@ -85,20 +86,28 @@
         </li>
       </ul>
     </div>
+
   </div>
 </nav>
 
-<!-- Navegación Menu de hamburguesa (móvil) -->
-<div aria-labelledby="mobileNavOffcanvasLabel"
-     class="offcanvas offcanvas-start cr-offcanvas"
-     id="mobileNavOffcanvas"
-     tabindex="-1">
+<!-- Menú móvil -->
+<div
+  class="offcanvas offcanvas-start cr-offcanvas"
+  tabindex="-1"
+  id="mobileNavOffcanvas"
+  aria-labelledby="mobileNavOffcanvasLabel">
 
   <div class="offcanvas-header border-bottom border-secondary-subtle">
     <h5 class="offcanvas-title cr-h3 m-0" id="mobileNavOffcanvasLabel">
       Menú
     </h5>
-    <button aria-label="Cerrar" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" type="button"></button>
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+      aria-label="Cerrar">
+    </button>
   </div>
 
   <div class="offcanvas-body">

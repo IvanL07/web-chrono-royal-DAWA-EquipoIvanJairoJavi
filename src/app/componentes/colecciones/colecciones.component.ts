@@ -60,4 +60,11 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
 
     this.cart.add(product.id);
   }
+
+  formatEUR(value: number): string {
+    return new Intl.NumberFormat('es-ES', {
+      style: 'currency',
+      currency: 'EUR'
+    }).format(value || 0);
+  }
 }
