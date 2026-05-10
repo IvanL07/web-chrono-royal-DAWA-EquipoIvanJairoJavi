@@ -1,4 +1,4 @@
-<div>
+<div class="container pb-5" style="padding-top: 2rem; padding-bottom: 4rem;">
   <header class="text-center py-5 mt-3">
     <div class="container">
       <h1 class="cr-display text-white text-uppercase">Contacto</h1>
@@ -6,9 +6,9 @@
     </div>
   </header>
 
-  <div class="row g-5">
+  <div class="row g-5 px-2 px-md-3 px-lg-4">
     <div class="col-12 col-lg-7">
-      <div class="cr-surface rounded-4 p-4 p-md-5">
+      <div class="cr-surface rounded-4 p-4 p-md-5 h-100">
         <h2 class="cr-h3 mb-4">Envíanos un mensaje</h2>
 
         @if (enviado()) {
@@ -19,69 +19,82 @@
           </div>
         }
 
-        <form (ngSubmit)="enviar()" class="vstack gap-3">
+        <form #f="ngForm" (ngSubmit)="f.valid && enviar()" class="vstack gap-3">
+
           <div class="row g-3">
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Nombre</label>
               <input type="text" class="form-control cr-input"
                      [(ngModel)]="form.nombre" name="nombre" required>
             </div>
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Apellidos</label>
               <input type="text" class="form-control cr-input"
                      [(ngModel)]="form.apellidos" name="apellidos" required>
             </div>
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Correo electrónico</label>
               <input type="email" class="form-control cr-input"
                      [(ngModel)]="form.email" name="email" required>
             </div>
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Teléfono</label>
               <input type="tel" class="form-control cr-input"
-                     [(ngModel)]="form.telefono" name="telefono" placeholder="+34 600 000 000">
+                     [(ngModel)]="form.telefono" name="telefono" required placeholder="+34 600 000 000">
             </div>
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">País</label>
               <select class="form-select cr-select"
-                      [(ngModel)]="form.pais" name="pais">
+                      [(ngModel)]="form.pais" name="pais" required>
                 <option value="">Selecciona un país</option>
                 @for (pais of paises; track pais) {
                   <option [value]="pais">{{ pais }}</option>
                 }
               </select>
             </div>
+
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Ciudad</label>
               <input type="text" class="form-control cr-input"
-                     [(ngModel)]="form.ciudad" name="ciudad">
+                     [(ngModel)]="form.ciudad" name="ciudad" required>
             </div>
+
             <div class="col-12">
               <label class="form-label small text-white-50">Motivo del contacto</label>
               <select class="form-select cr-select"
-                      [(ngModel)]="form.motivo" name="motivo">
+                      [(ngModel)]="form.motivo" name="motivo" required>
                 <option value="">Selecciona una opción</option>
                 @for (m of motivos; track m) {
                   <option [value]="m">{{ m }}</option>
                 }
               </select>
             </div>
+
             <div class="col-12">
               <label class="form-label small text-white-50">Mensaje</label>
               <textarea class="form-control cr-input" rows="4"
                         [(ngModel)]="form.mensaje" name="mensaje"
-                        placeholder="Cuéntanos qué necesitas..."></textarea>
+                        placeholder="Cuéntanos qué necesitas..." required></textarea>
             </div>
+
           </div>
-          <button type="submit" class="btn cr-btn-gold py-3">
+
+          <button type="submit" class="btn cr-btn-gold py-3" [disabled]="!f.valid">
             <i class="bi bi-send me-2"></i>Enviar mensaje
           </button>
+
         </form>
       </div>
     </div>
 
-    <div class="col-12 col-lg-5">
-      <div class="cr-surface rounded-4 p-4 p-md-5">
+    <div class="col-12 col-lg-5 d-flex flex-column gap-4">
+
+      <div class="cr-surface rounded-4 p-4 p-md-5 flex-fill">
         <h2 class="cr-h3 mb-4">Nuestra boutique</h2>
         <div class="vstack gap-4">
           @for (info of [
@@ -98,6 +111,14 @@
               </div>
             </div>
           }
+        </div>
+      </div>
+
+      <div class="cr-surface rounded-4 p-3 p-md-4 flex-fill d-flex">
+        <div class="rounded-4 overflow-hidden w-100">
+          <img src="assets/imgs/Fachada_Tienda_Relojes.png"
+               alt="Fachada Chrono Royale"
+               class="w-100 h-100 object-fit-cover">
         </div>
       </div>
     </div>
