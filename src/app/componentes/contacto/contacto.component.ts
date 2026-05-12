@@ -1,26 +1,20 @@
 import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-contacto',
   standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './contacto.component.html',
   styleUrl: './contacto.component.css'
 })
 export class ContactoComponent {
   enviado = signal(false);
   submitted = false;
+
   paisOpen = false;
   motivoOpen = false;
-
-  togglePais()   { this.paisOpen   = !this.paisOpen;   this.motivoOpen = false; }
-  toggleMotivo() { this.motivoOpen = !this.motivoOpen; this.paisOpen   = false; }
-
-  seleccionarPais(p: string)   { this.form.pais   = p; this.paisOpen   = false; }
-  seleccionarMotivo(m: string) { this.form.motivo = m; this.motivoOpen = false; }
 
   form = {
     nombre: '',
@@ -36,12 +30,59 @@ export class ContactoComponent {
   paises = ['España', 'Portugal', 'Francia', 'Italia', 'Alemania', 'Reino Unido'];
   motivos = ['Compra', 'Información adicional', 'Disponibilidad / Reservas', 'Estado / Documentación'];
 
-  enviar(f: any): void {
+  togglePais(): void {
+    this.paisOpen = !this.paisOpen;
+    this.motivoOpen = false;
+  }
+
+  toggleMotivo(): void {
+    this.motivoOpen = !this.motivoOpen;
+    this.paisOpen = false;
+  }
+
+  seleccionarPais(pais: string): void {
+    this.form.pais = pais;
+    this.paisOpen = false;
+  }
+
+  seleccionarMotivo(motivo: string): void {
+    this.form.motivo = motivo;
+    this.motivoOpen = false;
+  }
+
+  enviar(f: NgForm): void {
     this.submitted = true;
-    if (!f.valid || !this.form.pais || !this.form.motivo) return;
+
+    if (
+      f.invalid ||
+      !this.form.nombre ||
+      !this.form.apellidos ||
+      !this.form.email ||
+      !this.form.telefono ||
+      !this.form.pais ||
+      !this.form.ciudad ||
+      !this.form.motivo ||
+      !this.form.mensaje
+    ) {
+      return;
+    }
+
     this.enviado.set(true);
     this.submitted = false;
-    this.form = { nombre: '', apellidos: '', email: '', telefono: '', pais: '', ciudad: '', motivo: '', mensaje: '' };
+
+    this.form = {
+      nombre: '',
+      apellidos: '',
+      email: '',
+      telefono: '',
+      pais: '',
+      ciudad: '',
+      motivo: '',
+      mensaje: ''
+    };
+
+    f.resetForm(this.form);
+
     setTimeout(() => this.enviado.set(false), 5000);
   }
 }

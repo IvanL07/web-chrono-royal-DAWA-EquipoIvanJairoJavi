@@ -1,4 +1,4 @@
-<div class="container pb-5" style="padding-top: 2rem; padding-bottom: 4rem;">
+<div class="container cr-contact-page">
   <header class="text-center">
     <div class="container">
       <h1 class="cr-display text-white text-uppercase">Contacto</h1>
@@ -69,7 +69,6 @@
                 <div class="cr-custom-select__trigger" [class.selected]="form.pais" [class.cr-select--error]="submitted && !form.pais">
                   <span>{{ form.pais || 'Selecciona un país' }}</span>
                   <i *ngIf="!form.pais" class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="paisOpen"></i>
-                  <i *ngIf="form.pais" class="bi bi-check-circle-fill" style="color:#198754"></i>
                 </div>
                 @if (paisOpen) {
                   <div class="cr-custom-select__dropdown">
@@ -104,25 +103,37 @@
 
             <div class="col-12">
               <label class="form-label small text-white-50">Motivo del contacto</label>
+
               <div class="cr-custom-select" (click)="toggleMotivo()">
-                <div class="cr-custom-select__trigger" [class.selected]="form.motivo">
+                <div
+                  class="cr-custom-select__trigger"
+                  [class.selected]="form.motivo"
+                  [class.cr-select--error]="submitted && !form.motivo">
+
                   <span>{{ form.motivo || 'Selecciona una opción' }}</span>
-                  <i *ngIf="!form.motivo" class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="motivoOpen"></i>
-                  <i *ngIf="form.motivo" class="bi bi-check-circle-fill" style="color:#198754"></i>
+
+                  <i class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="motivoOpen"></i>
                 </div>
+
                 @if (motivoOpen) {
                   <div class="cr-custom-select__dropdown">
                     @for (m of motivos; track m) {
-                      <div class="cr-custom-select__option"
-                           [class.selected]="form.motivo === m"
-                           (click)="seleccionarMotivo(m); $event.stopPropagation()">
+                      <div
+                        class="cr-custom-select__option"
+                        [class.selected]="form.motivo === m"
+                        (click)="seleccionarMotivo(m); $event.stopPropagation()">
                         {{ m }}
                       </div>
                     }
                   </div>
                 }
               </div>
+
               <input type="hidden" [(ngModel)]="form.motivo" name="motivo" required>
+
+              <div *ngIf="submitted && !form.motivo" class="cr-error-msg mt-1">
+                <i class="bi bi-exclamation-circle me-1"></i>Selecciona un motivo.
+              </div>
             </div>
 
             <div class="col-12">

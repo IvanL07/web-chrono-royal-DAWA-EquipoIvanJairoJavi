@@ -119,3 +119,71 @@ textarea.cr-input {
   margin-top: 4px;
   padding-left: 0.5rem;
 }
+
+/* =========================================================
+   ESPACIADO CONTACTO
+========================================================= */
+
+.cr-contact-page {
+  padding-top: 3.5rem;
+  padding-bottom: 5rem;
+}
+
+.cr-contact-page header {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.8rem !important;
+  margin-top: 0 !important;
+}
+
+.cr-contact-page .row {
+  margin-top: 0.5rem;
+}
+
+/* =========================================================
+   VALIDACIÓN ROJA COMO SOLICITAR CONSULTA
+========================================================= */
+
+.cr-input.ng-invalid.ng-touched,
+.cr-input--error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.18) !important;
+}
+
+.cr-input--error:focus {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.22) !important;
+}
+
+.cr-select--error {
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.18) !important;
+}
+
+.cr-error-msg {
+  color: #dc3545;
+  font-size: 0.78rem;
+  margin-top: 0.35rem;
+  padding-left: 0.55rem;
+  font-weight: 500;
+}
+
+/* Quita ticks verdes duplicados o raros */
+.cr-custom-select__trigger.selected::after {
+  content: none !important;
+}
+
+/* Estética seleccionada sin romper colorimetría */
+.cr-custom-select__trigger.selected {
+  border-color: rgba(215, 177, 90, 0.65) !important;
+  color: #fff;
+}
+
+/* Flecha siempre visible */
+.cr-custom-select__arrow {
+  color: var(--cr-gold, #d7b15a);
+  transition: transform 0.2s ease;
+}
+
+.cr-custom-select__arrow.open {
+  transform: rotate(180deg);
+}
