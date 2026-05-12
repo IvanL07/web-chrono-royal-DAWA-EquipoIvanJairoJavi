@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactoComponent {
   enviado = signal(false);
+  submitted = false;
   paisOpen = false;
   motivoOpen = false;
 
@@ -35,8 +36,11 @@ export class ContactoComponent {
   paises = ['España', 'Portugal', 'Francia', 'Italia', 'Alemania', 'Reino Unido'];
   motivos = ['Compra', 'Información adicional', 'Disponibilidad / Reservas', 'Estado / Documentación'];
 
-  enviar(): void {
+  enviar(f: any): void {
+    this.submitted = true;
+    if (!f.valid || !this.form.pais || !this.form.motivo) return;
     this.enviado.set(true);
+    this.submitted = false;
     this.form = { nombre: '', apellidos: '', email: '', telefono: '', pais: '', ciudad: '', motivo: '', mensaje: '' };
     setTimeout(() => this.enviado.set(false), 5000);
   }

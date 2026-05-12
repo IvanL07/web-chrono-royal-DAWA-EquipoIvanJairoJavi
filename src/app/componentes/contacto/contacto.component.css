@@ -59,3 +59,63 @@
   color: #d7b15a;
   font-weight: 600;
 }
+.cr-input {
+  background: rgba(0, 0, 0, 0.25) !important;
+  border: 1px solid rgba(255, 193, 7, 0.25) !important;
+  border-radius: 50rem !important;
+  color: #fff !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  transition: border-color 0.2s;
+}
+
+.cr-input:focus {
+  background: rgba(0, 0, 0, 0.35) !important;
+  border-color: rgba(255, 193, 7, 0.55) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+}
+
+.cr-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+textarea.cr-input {
+  border-radius: 1rem !important;
+}
+
+
+
+
+
+.cr-custom-select__trigger.selected {
+  border-color: #198754 !important;
+}
+
+.cr-custom-select__trigger.selected::after {
+  content: "\F26B";
+  font-family: "bootstrap-icons";
+  color: #198754;
+  font-size: 1rem;
+  margin-left: 8px;
+}
+
+/* Validación errores */
+.cr-input--error {
+  border-color: #dc3545 !important;
+}
+
+.cr-input--error:focus {
+  border-color: #dc3545 !important;
+}
+
+.cr-select--error {
+  border-color: #dc3545 !important;
+}
+
+.cr-error-msg {
+  color: #dc3545;
+  font-size: 0.78rem;
+  margin-top: 4px;
+  padding-left: 0.5rem;
+}

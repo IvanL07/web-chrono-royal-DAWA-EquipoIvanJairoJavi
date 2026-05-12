@@ -19,40 +19,57 @@
           </div>
         }
 
-        <form #f="ngForm" (ngSubmit)="f.valid && enviar()" class="vstack gap-3">
+        <form #f="ngForm" (ngSubmit)="enviar(f)" class="vstack gap-3">
 
           <div class="row g-3">
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Nombre</label>
               <input type="text" class="form-control cr-input"
+                     [class.cr-input--error]="submitted && !form.nombre"
                      [(ngModel)]="form.nombre" name="nombre" required>
+              <div *ngIf="submitted && !form.nombre" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Apellidos</label>
               <input type="text" class="form-control cr-input"
+                     [class.cr-input--error]="submitted && !form.apellidos"
                      [(ngModel)]="form.apellidos" name="apellidos" required>
+              <div *ngIf="submitted && !form.apellidos" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Correo electrónico</label>
               <input type="email" class="form-control cr-input"
+                     [class.cr-input--error]="submitted && !form.email"
                      [(ngModel)]="form.email" name="email" required>
+              <div *ngIf="submitted && !form.email" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Teléfono</label>
               <input type="tel" class="form-control cr-input"
+                     [class.cr-input--error]="submitted && !form.telefono"
                      [(ngModel)]="form.telefono" name="telefono" required placeholder="+34 600 000 000">
+              <div *ngIf="submitted && !form.telefono" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">País</label>
               <div class="cr-custom-select" (click)="togglePais()">
-                <div class="cr-custom-select__trigger">
+                <div class="cr-custom-select__trigger" [class.selected]="form.pais" [class.cr-select--error]="submitted && !form.pais">
                   <span>{{ form.pais || 'Selecciona un país' }}</span>
-                  <i class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="paisOpen"></i>
+                  <i *ngIf="!form.pais" class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="paisOpen"></i>
+                  <i *ngIf="form.pais" class="bi bi-check-circle-fill" style="color:#198754"></i>
                 </div>
                 @if (paisOpen) {
                   <div class="cr-custom-select__dropdown">
@@ -67,21 +84,31 @@
                 }
               </div>
               <!-- campo oculto para que ngForm lo valide -->
+              <!-- campo oculto para que ngForm lo valide -->
               <input type="hidden" [(ngModel)]="form.pais" name="pais" required>
+              <div *ngIf="submitted && !form.pais" class="cr-error-msg mt-1">
+                <i class="bi bi-exclamation-circle me-1"></i>Selecciona un país.
+              </div>
             </div>
+
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">Ciudad</label>
               <input type="text" class="form-control cr-input"
+                     [class.cr-input--error]="submitted && !form.ciudad"
                      [(ngModel)]="form.ciudad" name="ciudad" required>
+              <div *ngIf="submitted && !form.ciudad" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
             <div class="col-12">
               <label class="form-label small text-white-50">Motivo del contacto</label>
               <div class="cr-custom-select" (click)="toggleMotivo()">
-                <div class="cr-custom-select__trigger">
+                <div class="cr-custom-select__trigger" [class.selected]="form.motivo">
                   <span>{{ form.motivo || 'Selecciona una opción' }}</span>
-                  <i class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="motivoOpen"></i>
+                  <i *ngIf="!form.motivo" class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="motivoOpen"></i>
+                  <i *ngIf="form.motivo" class="bi bi-check-circle-fill" style="color:#198754"></i>
                 </div>
                 @if (motivoOpen) {
                   <div class="cr-custom-select__dropdown">
@@ -101,13 +128,17 @@
             <div class="col-12">
               <label class="form-label small text-white-50">Mensaje</label>
               <textarea class="form-control cr-input" rows="4"
+                        [class.cr-input--error]="submitted && !form.mensaje"
                         [(ngModel)]="form.mensaje" name="mensaje"
                         placeholder="Cuéntanos qué necesitas..." required></textarea>
+              <div *ngIf="submitted && !form.mensaje" class="cr-error-msg">
+                <i class="bi bi-exclamation-circle me-1"></i>Campo obligatorio.
+              </div>
             </div>
 
           </div>
 
-          <button type="submit" class="btn cr-btn-gold py-3" [disabled]="!f.valid">
+          <button type="submit" class="btn cr-btn-gold py-3">
             <i class="bi bi-send me-2"></i>Enviar mensaje
           </button>
 
