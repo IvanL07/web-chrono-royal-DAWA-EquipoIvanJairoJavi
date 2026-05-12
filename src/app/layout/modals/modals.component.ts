@@ -353,6 +353,13 @@ export class ModalsComponent implements OnInit {
 
     btn.addEventListener('click', () => {
       this.session.logout();
+
+      // Limpiar los campos del modal
+      const emailInput = document.getElementById('loginEmail') as HTMLInputElement;
+      const passInput  = document.getElementById('loginPass')  as HTMLInputElement;
+      if (emailInput) emailInput.value = '';
+      if (passInput)  passInput.value  = '';
+
       this.closeModal('loginModal');
     });
   }
