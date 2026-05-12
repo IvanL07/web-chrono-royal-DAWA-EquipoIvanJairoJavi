@@ -12,6 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class ContactoComponent {
   enviado = signal(false);
+  paisOpen = false;
+  motivoOpen = false;
+
+  togglePais()   { this.paisOpen   = !this.paisOpen;   this.motivoOpen = false; }
+  toggleMotivo() { this.motivoOpen = !this.motivoOpen; this.paisOpen   = false; }
+
+  seleccionarPais(p: string)   { this.form.pais   = p; this.paisOpen   = false; }
+  seleccionarMotivo(m: string) { this.form.motivo = m; this.motivoOpen = false; }
 
   form = {
     nombre: '',

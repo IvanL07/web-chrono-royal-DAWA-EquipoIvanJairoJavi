@@ -1,3 +1,61 @@
 .cr-surface {
   background: #000 !important;
 }
+.cr-custom-select {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cr-custom-select__trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 193, 7, 0.25);
+  border-radius: 50rem;
+  color: #fff;
+  transition: border-color 0.2s;
+  min-height: calc(1.5em + 0.75rem + 2px);
+}
+
+.cr-custom-select:hover .cr-custom-select__trigger {
+  border-color: rgba(255, 193, 7, 0.55);
+}
+
+.cr-custom-select__arrow {
+  transition: transform 0.2s;
+  color: #d7b15a;
+}
+
+.cr-custom-select__arrow.open {
+  transform: rotate(180deg);
+}
+
+.cr-custom-select__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 0.5rem;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.cr-custom-select__option {
+  padding: 0.6rem 0.75rem;
+  color: #fff;
+  transition: background 0.15s;
+}
+
+.cr-custom-select__option:hover {
+  background: rgba(215, 177, 90, 0.12);
+}
+
+.cr-custom-select__option.selected {
+  color: #d7b15a;
+  font-weight: 600;
+}

@@ -45,6 +45,9 @@
         data-bs-target="#loginModal"
         aria-label="Usuario / Login">
         <i class="bi bi-person"></i>
+        <span *ngIf="isLogged" class="cr-user-label d-none d-lg-inline">
+    {{ userEmail }}
+  </span>
       </button>
 
       <!-- Carrito -->

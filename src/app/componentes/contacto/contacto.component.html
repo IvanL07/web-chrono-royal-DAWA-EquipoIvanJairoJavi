@@ -49,13 +49,25 @@
 
             <div class="col-12 col-md-6">
               <label class="form-label small text-white-50">País</label>
-              <select class="form-select cr-select"
-                      [(ngModel)]="form.pais" name="pais" required>
-                <option value="">Selecciona un país</option>
-                @for (pais of paises; track pais) {
-                  <option [value]="pais">{{ pais }}</option>
+              <div class="cr-custom-select" (click)="togglePais()">
+                <div class="cr-custom-select__trigger">
+                  <span>{{ form.pais || 'Selecciona un país' }}</span>
+                  <i class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="paisOpen"></i>
+                </div>
+                @if (paisOpen) {
+                  <div class="cr-custom-select__dropdown">
+                    @for (pais of paises; track pais) {
+                      <div class="cr-custom-select__option"
+                           [class.selected]="form.pais === pais"
+                           (click)="seleccionarPais(pais); $event.stopPropagation()">
+                        {{ pais }}
+                      </div>
+                    }
+                  </div>
                 }
-              </select>
+              </div>
+              <!-- campo oculto para que ngForm lo valide -->
+              <input type="hidden" [(ngModel)]="form.pais" name="pais" required>
             </div>
 
             <div class="col-12 col-md-6">
@@ -66,13 +78,24 @@
 
             <div class="col-12">
               <label class="form-label small text-white-50">Motivo del contacto</label>
-              <select class="form-select cr-select"
-                      [(ngModel)]="form.motivo" name="motivo" required>
-                <option value="">Selecciona una opción</option>
-                @for (m of motivos; track m) {
-                  <option [value]="m">{{ m }}</option>
+              <div class="cr-custom-select" (click)="toggleMotivo()">
+                <div class="cr-custom-select__trigger">
+                  <span>{{ form.motivo || 'Selecciona una opción' }}</span>
+                  <i class="bi bi-chevron-down cr-custom-select__arrow" [class.open]="motivoOpen"></i>
+                </div>
+                @if (motivoOpen) {
+                  <div class="cr-custom-select__dropdown">
+                    @for (m of motivos; track m) {
+                      <div class="cr-custom-select__option"
+                           [class.selected]="form.motivo === m"
+                           (click)="seleccionarMotivo(m); $event.stopPropagation()">
+                        {{ m }}
+                      </div>
+                    }
+                  </div>
                 }
-              </select>
+              </div>
+              <input type="hidden" [(ngModel)]="form.motivo" name="motivo" required>
             </div>
 
             <div class="col-12">

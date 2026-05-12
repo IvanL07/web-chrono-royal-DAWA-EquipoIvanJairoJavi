@@ -241,6 +241,16 @@ export class ModalsComponent implements OnInit {
       }
 
       document.body.classList.add('modal-open');
+
+      // Si hay sesión activa, rellenar los campos con los datos del usuario
+      const sessionData = this.session.getSession();
+      const emailInput = document.getElementById('loginEmail') as HTMLInputElement;
+      const passInput  = document.getElementById('loginPass')  as HTMLInputElement;
+
+      if (sessionData.isLogged && emailInput) {
+        emailInput.value = sessionData.userEmail;
+        if (passInput) passInput.value = '••••••••';
+      }
     });
 
     el.addEventListener('hidden.bs.modal', () => {

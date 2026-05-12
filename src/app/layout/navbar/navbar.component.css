@@ -41,79 +41,76 @@
 
 .cr-icon-btn {
   border: 1px solid rgba(215, 177, 90, 0.18) !important;
-
   background: transparent !important;
-
   color: var(--cr-text) !important;
-
   border-radius: 16px;
-
   width: 44px;
   height: 44px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 0;
-
   outline: none !important;
-
   box-shadow: none !important;
-
   transition:
     border-color 0.25s ease,
     transform 0.25s ease;
 }
 
-/* HOVER REAL */
 .cr-icon-btn:hover {
   background: transparent !important;
-
   border-color: transparent !important;
-
   color: var(--cr-text) !important;
-
   box-shadow: none !important;
-
   outline: none !important;
-
   transform: translateY(-1px);
 }
 
-/* CLICK / FOCUS */
 .cr-icon-btn:focus,
 .cr-icon-btn:active,
 .cr-icon-btn:focus-visible,
 .cr-icon-btn.show {
   background: transparent !important;
-
   border-color: rgba(215, 177, 90, 0.18) !important;
-
   color: var(--cr-text) !important;
-
   box-shadow: none !important;
-
   outline: none !important;
-
   transform: none;
 }
 
-/* SI EL RATÓN VUELVE A PASAR */
 .cr-icon-btn:focus:hover,
 .cr-icon-btn:active:hover,
 .cr-icon-btn.show:hover {
   background: transparent !important;
-
   border-color: transparent !important;
-
   transform: translateY(-1px);
 }
 
-/* ICONOS */
 .cr-icon-btn i {
   font-size: 1.25rem;
   line-height: 1;
+  flex-shrink: 0;
+}
+
+/* =========================
+   USUARIO LOGUEADO
+========================= */
+
+.cr-icon-btn:has(.cr-user-label) {
+  width: auto !important;
+  min-width: 44px;
+  padding: 0 12px !important;
+  border-radius: 20px !important;
+  justify-content: flex-start !important;
+  gap: 6px;
+}
+
+.cr-user-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  color: var(--cr-gold, #c9a84c);
 }
 
 /* =========================
@@ -126,9 +123,7 @@
     var(--cr-gold),
     var(--cr-gold-2)
   );
-
   color: #0b0b0d;
-
   font-weight: 700;
 }
 
@@ -138,9 +133,7 @@
 
 .cr-offcanvas {
   background: rgba(12, 12, 15, 0.98);
-
   color: var(--cr-text);
-
   border-left: 1px solid rgba(215, 177, 90, 0.18);
 }
 
@@ -181,11 +174,31 @@
   .cr-icon-btn {
     width: 48px;
     height: 48px;
-
     border-radius: 14px;
   }
 
   .cr-icon-btn i {
     font-size: 1.1rem;
   }
+  /* =========================
+    USUARIO LOGUEADO
+ ========================= */
+
+  .cr-icon-btn:has(.cr-user-label) {
+    width: auto !important;
+    min-width: 44px;
+    padding: 0 12px !important;
+    border-radius: 20px !important;
+    gap: 6px;
+  }
+
+  .cr-user-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1;
+    color: var(--cr-gold, #c9a84c);
+    font-size: 0.75rem;
+  }
+
 }
