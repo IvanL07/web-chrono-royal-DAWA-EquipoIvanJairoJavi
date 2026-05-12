@@ -4,14 +4,11 @@
   color: #fff;
 }
 
-/* Precio dorado grande */
 .cr-price-big {
   color: var(--cr-gold);
   font-size: 2rem;
 }
 
-/* BOTÓN AÑADIR AL CARRITO */
-/* Normal: fondo dorado */
 .cr-btn-gold-inverted {
   background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
   color: #000;
@@ -19,15 +16,12 @@
   transition: 0.3s ease;
 }
 
-/* Hover: transparente con borde dorado */
 .cr-btn-gold-inverted:hover {
   background: transparent;
   color: var(--cr-gold);
   border: 1px solid var(--cr-gold);
 }
 
-
-/* Lista elegante */
 .cr-spec-list .list-group-item {
   border-color: rgba(255, 255, 255, 0.1);
 }

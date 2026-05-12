@@ -1,6 +1,3 @@
-/* Bootstrap ya está cargado desde angular.json */
-
-/* === TU CSS GLOBAL === */
 :root {
   --cr-bg: #0b0b0d;
   --cr-text: #f4f4f6;
@@ -10,7 +7,6 @@
   --cr-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
 }
 
-/* Fondo + tipografía base */
 .cr-body {
   background:
     radial-gradient(1200px 800px at 15% 0%,
@@ -31,7 +27,6 @@
     sans-serif;
 }
 
-/* Nav / offcanvas con blur */
 .cr-nav {
   background: rgba(11, 11, 13, 0.78) !important;
   backdrop-filter: blur(12px);
@@ -47,7 +42,6 @@
   border-left: 1px solid rgba(215, 177, 90, 0.18);
 }
 
-/* Tipografías de marca */
 .cr-brand-title,
 .cr-display,
 .cr-h2,
@@ -78,7 +72,6 @@
   font-size: 1.15rem;
 }
 
-/* Hero */
 .cr-hero-title {
   letter-spacing: clamp(2px, 0.8vw, 5px);
   font-size: clamp(1.4rem, 4.5vw, 2.7rem);
@@ -90,7 +83,6 @@
   filter: contrast(1.05) saturate(1.05);
 }
 
-/* Botones */
 .cr-btn-gold {
   background: linear-gradient(135deg, var(--cr-gold), var(--cr-gold-2));
   border: none;
@@ -114,13 +106,11 @@
   color: var(--cr-gold);
 }
 
-/* Logo */
 .cr-logo {
   object-fit: contain;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.45));
 }
 
-/* Divisores */
 .cr-divider {
   height: 1px;
   background: linear-gradient(90deg,
@@ -139,7 +129,6 @@
   );
 }
 
-/* Utilidades */
 .cr-ratio-28 {
   --bs-aspect-ratio: 28%;
 }
@@ -152,7 +141,6 @@
   min-height: 260px;
 }
 
-/* Toast consulta */
 .cr-consult-backdrop {
   z-index: 1089;
   background: rgba(0, 0, 0, 0.85);
@@ -163,18 +151,16 @@
   width: min(520px, 92vw);
 }
 
-/* Hover botón colecciones y eliminar producto modal carrito */
 .btn-link.text-warning:hover {
   color: #b88b2a !important;
 }
-/* ── Superficie de tarjeta ── */
+
 .cr-surface {
   background: rgba(18, 18, 23, 0.8);
   border: 1px solid rgba(215, 177, 90, 0.14);
   color: #f4f4f6;
 }
 
-/* ── Inputs del formulario ── */
 .cr-input {
   background: rgba(17, 17, 20, 0.7) !important;
   border: 1px solid rgba(215, 177, 90, 0.25) !important;
@@ -188,7 +174,6 @@
   box-shadow: 0 0 0 0.2rem rgba(215, 177, 90, 0.12) !important;
 }
 
-/* ── Select del formulario ── */
 .cr-select {
   background: rgba(17, 17, 20, 0.7) !important;
   border: 1px solid rgba(215, 177, 90, 0.25) !important;
@@ -218,10 +203,6 @@
   color: #f4f4f6 !important;
   border-radius: 10px !important;
 }
-
-/* =========================================
-   CARRITO EXACTO HTML ORIGINAL
-========================================= */
 
 .cr-offcanvas {
   background: rgba(12, 12, 15, 0.98);
@@ -267,7 +248,6 @@
   color: var(--cr-gold);
 }
 
-/* Esto evita que Bootstrap ponga Eliminar azul */
 #cartOffcanvas .btn-link.cr-link-gold {
   color: var(--cr-gold) !important;
 }
@@ -275,10 +255,6 @@
 #cartOffcanvas .btn-link.cr-link-gold:hover {
   color: var(--cr-gold-2) !important;
 }
-
-/* =========================================
-   VALIDACIÓN MODAL SOLICITAR CONSULTA
-========================================= */
 
 #contactInquiryForm.was-validated .form-control:invalid,
 #contactInquiryForm.was-validated .form-select:invalid {
@@ -292,7 +268,6 @@
   box-shadow: none !important;
 }
 
-/* Botones visibles de los dropdowns personalizados */
 #contactInquiryForm .dropdown button.is-invalid {
   border-color: #dc3545 !important;
   box-shadow: 0 0 0 .15rem rgba(220, 53, 69, .25) !important;
@@ -303,12 +278,10 @@
   box-shadow: none !important;
 }
 
-/* Mensajes de error como Bootstrap */
 #contactInquiryForm.was-validated .invalid-feedback {
   display: block;
 }
 
-/* Caja de piezas seleccionadas igual que HTML */
 #contactCartSummary {
   min-height: 48px;
   overflow: hidden;
@@ -318,7 +291,6 @@
   border-bottom: 0 !important;
 }
 
-/* Toast premium centrado */
 .cr-consult-backdrop {
   z-index: 1080;
 }
@@ -327,10 +299,6 @@
   z-index: 1090;
   width: min(520px, calc(100% - 32px));
 }
-
-/* =========================================================
-   CALCO ESPACIADO COLECCIONES / CONTACTO / SOBRE NOSOTROS
-========================================================= */
 
 main.min-vh-100.py-5.border-top.border-secondary-subtle > header.text-center {
   margin-top: 0 !important;

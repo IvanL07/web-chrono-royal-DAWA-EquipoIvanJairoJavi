@@ -84,13 +84,11 @@
   font-weight: 700;
 }
 
-
 .cr-offcanvas {
   background: rgba(12, 12, 15, 0.98);
   color: var(--cr-text);
   border-left: 1px solid rgba(215, 177, 90, 0.18);
 }
-
 
 @media (max-width: 991.98px) {
   .cr-icon-btn {

@@ -1,78 +1,59 @@
-<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark cr-nav sticky-top border-bottom border-secondary-subtle">
   <div class="container py-2">
 
-    <!-- Hamburguesa (izquierda) -->
     <button
       class="navbar-toggler d-lg-none p-2 order-0"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#mobileNavOffcanvas"
-      aria-controls="mobileNavOffcanvas"
       aria-label="Abrir menú">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Logo centrado en móvil -->
     <a
       class="navbar-brand d-flex d-lg-none align-items-center justify-content-center flex-grow-1 m-0 order-1"
-      routerLink="/"
-      aria-label="Inicio">
-      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo cr-logo--mobile" />
+      routerLink="/">
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo cr-logo--mobile">
     </a>
 
-    <!-- Iconos derecha -->
     <div class="d-flex align-items-center gap-2 order-2">
 
-      <!-- Lupa -->
-      <button
-        class="btn cr-icon-btn"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#filterModal"
-        aria-label="Buscar / Filtrar">
+      <button class="btn cr-icon-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#filterModal"
+              aria-label="Buscar">
         <i class="bi bi-search"></i>
       </button>
 
-      <!-- Usuario -->
-      <button
-        class="btn cr-icon-btn"
-        type="button"
-        data-bs-toggle="modal"
-        data-bs-target="#loginModal"
-        aria-label="Usuario / Login">
+      <button class="btn cr-icon-btn"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+              aria-label="Usuario">
         <i class="bi bi-person"></i>
         <span *ngIf="isLogged" class="cr-user-label d-none d-lg-inline">
           {{ userEmail }}
         </span>
       </button>
 
-      <!-- Carrito -->
-      <button
-        class="btn cr-icon-btn position-relative"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas"
-        aria-controls="cartOffcanvas"
-        aria-label="Carrito">
+      <button class="btn cr-icon-btn position-relative"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#cartOffcanvas"
+              aria-label="Carrito">
         <i class="bi bi-bag"></i>
 
-        <span
-          *ngIf="cartCount > 0"
-          class="position-absolute top-0 start-100 translate-middle badge rounded-pill cr-badge">
+        <span *ngIf="cartCount > 0"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill cr-badge">
           {{ cartCount }}
         </span>
       </button>
 
     </div>
 
-    <!-- Marca PC -->
     <a class="navbar-brand d-none d-lg-flex align-items-center gap-2 order-lg-0" routerLink="/">
-      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo" />
+      <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo">
       <span class="cr-brand-title">CHRONO ROYAL</span>
     </a>
 
-    <!-- Navegación PC -->
     <div class="d-none d-lg-flex flex-grow-1 justify-content-center order-lg-1">
       <ul class="navbar-nav gap-lg-2">
         <li class="nav-item">
@@ -90,52 +71,27 @@
   </div>
 </nav>
 
-<!-- Menú móvil -->
-<div
-  class="offcanvas offcanvas-start cr-offcanvas"
-  tabindex="-1"
-  id="mobileNavOffcanvas"
-  aria-labelledby="mobileNavOffcanvasLabel">
+<div class="offcanvas offcanvas-start cr-offcanvas"
+     id="mobileNavOffcanvas"
+     tabindex="-1">
 
   <div class="offcanvas-header border-bottom border-secondary-subtle">
-    <h5 class="offcanvas-title cr-h3 m-0" id="mobileNavOffcanvasLabel">
-      Menú
-    </h5>
-
-    <button
-      type="button"
-      class="btn-close btn-close-white"
-      data-bs-dismiss="offcanvas"
-      aria-label="Cerrar">
-    </button>
+    <h5 class="offcanvas-title cr-h3 m-0">Menú</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
   </div>
 
   <div class="offcanvas-body">
     <ul class="navbar-nav vstack gap-1">
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/colecciones"
-          data-bs-dismiss="offcanvas">
-          Colecciones
-        </a>
+        <a class="nav-link" routerLink="/colecciones" data-bs-dismiss="offcanvas">Colecciones</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/sobre-nosotros"
-          data-bs-dismiss="offcanvas">
-          Sobre Nosotros
-        </a>
+        <a class="nav-link" routerLink="/sobre-nosotros" data-bs-dismiss="offcanvas">Sobre Nosotros</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/contacto"
-          data-bs-dismiss="offcanvas">
-          Contacto
-        </a>
+        <a class="nav-link" routerLink="/contacto" data-bs-dismiss="offcanvas">Contacto</a>
       </li>
     </ul>
   </div>
+
 </div>
