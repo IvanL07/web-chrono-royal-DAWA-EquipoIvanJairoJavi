@@ -328,3 +328,15 @@
   width: min(520px, calc(100% - 32px));
 }
 
+/* =========================================================
+   CALCO ESPACIADO COLECCIONES / CONTACTO / SOBRE NOSOTROS
+========================================================= */
+
+main.min-vh-100.py-5.border-top.border-secondary-subtle > header.text-center {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+main.min-vh-100.py-5.border-top.border-secondary-subtle > section.pb-5 {
+  padding-top: 0 !important;
+}
