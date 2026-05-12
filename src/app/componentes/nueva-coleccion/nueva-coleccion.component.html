@@ -18,112 +18,146 @@
 
           <!-- Tarjeta 1 -->
           <div class="col-12">
-            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
-              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+            <div class="cr-product-card h-100 shadow-lg">
+
+              <!-- Imagen -->
+              <div class="ratio ratio-1x1 bg-black">
                 <img
                   [src]="productos[1].images[0]"
-                  alt="{{ productos[1].name }}"
-                  class="w-100 h-100 object-fit-contain p-4">
+                  [alt]="productos[1].name"
+                  class="cr-nc-img w-100 h-100 p-4">
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[1].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[1].brand }}</p>
+              <!-- Contenido -->
+              <div class="p-4">
 
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[1].price | currency:'EUR':'symbol':'1.0-0' }}
-                  </span>
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-semibold text-light">{{ productos[1].name }}</div>
+                    <div class="text-secondary small">{{ productos[1].brand }}</div>
+                  </div>
+
+                  <span class="cr-pill rounded-pill px-3 py-1">Premium</span>
+                </div>
+
+                <div class="mt-3">
+
+                  <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="cr-price mb-0">
+                      {{ productos[1].price | currency:'EUR':'symbol':'1.0-0' }}
+                    </div>
+
+                    <button
+                      class="btn cr-btn-gold btn-sm text-nowrap"
+                      (click)="addToCart(productos[1])">
+                      Añadir al carrito
+                    </button>
+                  </div>
 
                   <a
-                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    class="btn cr-btn-outline btn-sm w-100 mt-3"
                     [routerLink]="['/producto']"
                     [queryParams]="{ id: productos[1].id }">
                     Ver producto
                   </a>
+
                 </div>
-
-                <button
-                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
-                  (click)="addToCart(productos[1])">
-                  Añadir al carrito
-                </button>
-
               </div>
             </div>
           </div>
 
           <!-- Tarjeta 2 -->
           <div class="col-12">
-            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
-              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+            <div class="cr-product-card h-100 shadow-lg">
+
+              <div class="ratio ratio-1x1 bg-black">
                 <img
                   [src]="productos[2].images[0]"
-                  alt="{{ productos[2].name }}"
-                  class="w-100 h-100 object-fit-contain p-4">
+                  [alt]="productos[2].name"
+                  class="cr-nc-img w-100 h-100 p-4">
               </div>
 
+              <div class="p-4">
 
-              <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[2].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[2].brand }}</p>
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-semibold text-light">{{ productos[2].name }}</div>
+                    <div class="text-secondary small">{{ productos[2].brand }}</div>
+                  </div>
 
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[2].price | currency:'EUR':'symbol':'1.0-0' }}
-                  </span>
+                  <span class="cr-pill rounded-pill px-3 py-1">Premium</span>
+                </div>
+
+                <div class="mt-3">
+
+                  <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="cr-price mb-0">
+                      {{ productos[2].price | currency:'EUR':'symbol':'1.0-0' }}
+                    </div>
+
+                    <button
+                      class="btn cr-btn-gold btn-sm text-nowrap"
+                      (click)="addToCart(productos[2])">
+                      Añadir al carrito
+                    </button>
+                  </div>
 
                   <a
-                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    class="btn cr-btn-outline btn-sm w-100 mt-3"
                     [routerLink]="['/producto']"
                     [queryParams]="{ id: productos[2].id }">
                     Ver producto
                   </a>
+
                 </div>
-
-                <button
-                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
-                  (click)="addToCart(productos[2])">
-                  Añadir al carrito
-                </button>
-
               </div>
             </div>
           </div>
 
           <!-- Tarjeta 3 -->
           <div class="col-12">
-            <div class="card bg-dark border border-secondary border-opacity-25 rounded-4 shadow-lg h-100">
-              <div class="ratio ratio-1x1 bg-black rounded-top-4 overflow-hidden">
+            <div class="cr-product-card h-100 shadow-lg">
+
+              <div class="ratio ratio-1x1 bg-black">
                 <img
                   [src]="productos[3].images[0]"
-                  alt="{{ productos[3].name }}"
-                  class="w-100 h-100 object-fit-contain p-4">
+                  [alt]="productos[3].name"
+                  class="cr-nc-img w-100 h-100 p-4">
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title text-light">{{ productos[3].name }}</h5>
-                <p class="card-text text-secondary">{{ productos[3].brand }}</p>
+              <div class="p-4">
 
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="fw-bold" style="color: var(--cr-gold);">
-                    {{ productos[3].price | currency:'EUR':'symbol':'1.0-0' }}
-                  </span>
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-semibold text-light">{{ productos[3].name }}</div>
+                    <div class="text-secondary small">{{ productos[3].brand }}</div>
+                  </div>
+
+                  <span class="cr-pill rounded-pill px-3 py-1">Premium</span>
+                </div>
+
+                <div class="mt-3">
+
+                  <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="cr-price mb-0">
+                      {{ productos[3].price | currency:'EUR':'symbol':'1.0-0' }}
+                    </div>
+
+                    <button
+                      class="btn cr-btn-gold btn-sm text-nowrap"
+                      (click)="addToCart(productos[3])">
+                      Añadir al carrito
+                    </button>
+                  </div>
 
                   <a
-                    class="btn cr-btn-outline px-3 py-1 rounded-4"
+                    class="btn cr-btn-outline btn-sm w-100 mt-3"
                     [routerLink]="['/producto']"
                     [queryParams]="{ id: productos[3].id }">
                     Ver producto
                   </a>
+
                 </div>
-
-                <button
-                  class="btn cr-btn-gold w-100 mt-3 py-2 rounded-4 fw-semibold"
-                  (click)="addToCart(productos[3])">
-                  Añadir al carrito
-                </button>
-
               </div>
             </div>
           </div>

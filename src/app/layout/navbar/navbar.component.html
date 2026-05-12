@@ -2,9 +2,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark cr-nav sticky-top border-bottom border-secondary-subtle">
   <div class="container py-2">
 
-    <!-- Hamburguesa móvil -->
+    <!-- Hamburguesa (izquierda) -->
     <button
-      class="navbar-toggler d-lg-none p-1 order-0 cr-toggler"
+      class="navbar-toggler d-lg-none p-2 order-0"
       type="button"
       data-bs-toggle="offcanvas"
       data-bs-target="#mobileNavOffcanvas"
@@ -13,19 +13,16 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Marca móvil -->
+    <!-- Logo centrado en móvil -->
     <a
-      class="navbar-brand d-flex d-lg-none align-items-center gap-2 m-0 mx-2 order-1 flex-grow-1 justify-content-center cr-brand-mobile"
+      class="navbar-brand d-flex d-lg-none align-items-center justify-content-center flex-grow-1 m-0 order-1"
       routerLink="/"
       aria-label="Inicio">
       <img src="assets/imgs/logo.png" alt="Chrono Royale" class="cr-logo cr-logo--mobile" />
-      <span class="cr-brand-title cr-brand-title--mobile text-nowrap text-truncate d-inline-block">
-        CHRONO ROYAL
-      </span>
     </a>
 
     <!-- Iconos derecha -->
-    <div class="d-flex align-items-center gap-2 ms-auto order-2 cr-actions">
+    <div class="d-flex align-items-center gap-2 order-2">
 
       <!-- Lupa -->
       <button
@@ -46,8 +43,8 @@
         aria-label="Usuario / Login">
         <i class="bi bi-person"></i>
         <span *ngIf="isLogged" class="cr-user-label d-none d-lg-inline">
-    {{ userEmail }}
-  </span>
+          {{ userEmail }}
+        </span>
       </button>
 
       <!-- Carrito -->
@@ -116,13 +113,28 @@
   <div class="offcanvas-body">
     <ul class="navbar-nav vstack gap-1">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/colecciones">Colecciones</a>
+        <a
+          class="nav-link"
+          routerLink="/colecciones"
+          data-bs-dismiss="offcanvas">
+          Colecciones
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/sobre-nosotros">Sobre Nosotros</a>
+        <a
+          class="nav-link"
+          routerLink="/sobre-nosotros"
+          data-bs-dismiss="offcanvas">
+          Sobre Nosotros
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/contacto">Contacto</a>
+        <a
+          class="nav-link"
+          routerLink="/contacto"
+          data-bs-dismiss="offcanvas">
+          Contacto
+        </a>
       </li>
     </ul>
   </div>
