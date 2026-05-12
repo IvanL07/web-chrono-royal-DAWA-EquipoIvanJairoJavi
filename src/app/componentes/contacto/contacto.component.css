@@ -1,6 +1,13 @@
-.cr-surface {
-  background: #000 !important;
+:host {
+  display: block;
+  background: var(--cr-bg);
+  color: var(--cr-text);
 }
+
+.cr-surface {
+  background: #000;
+}
+
 .cr-custom-select {
   position: relative;
   cursor: pointer;
@@ -11,13 +18,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.375rem 0.75rem;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 193, 7, 0.25);
-  border-radius: 50rem;
+  border-radius: 50rem; /* pill */
   color: #fff;
+  padding: 0.375rem 0.75rem;
   transition: border-color 0.2s;
-  min-height: calc(1.5em + 0.75rem + 2px);
 }
 
 .cr-custom-select:hover .cr-custom-select__trigger {
@@ -25,8 +31,8 @@
 }
 
 .cr-custom-select__arrow {
-  transition: transform 0.2s;
-  color: #d7b15a;
+  color: var(--cr-gold, #d7b15a);
+  transition: transform 0.2s ease;
 }
 
 .cr-custom-select__arrow.open {
@@ -59,92 +65,13 @@
   color: #d7b15a;
   font-weight: 600;
 }
-.cr-input {
-  background: rgba(0, 0, 0, 0.25) !important;
-  border: 1px solid rgba(255, 193, 7, 0.25) !important;
-  border-radius: 50rem !important;
-  color: #fff !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  transition: border-color 0.2s;
-}
-
-.cr-input:focus {
-  background: rgba(0, 0, 0, 0.35) !important;
-  border-color: rgba(255, 193, 7, 0.55) !important;
-  box-shadow: none !important;
-  color: #fff !important;
-}
-
-.cr-input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-textarea.cr-input {
-  border-radius: 1rem !important;
-}
-
-
-
-
 
 .cr-custom-select__trigger.selected {
-  border-color: #198754 !important;
+  border-color: rgba(215, 177, 90, 0.65);
 }
 
-.cr-custom-select__trigger.selected::after {
-  content: "\F26B";
-  font-family: "bootstrap-icons";
-  color: #198754;
-  font-size: 1rem;
-  margin-left: 8px;
-}
-
-/* Validación errores */
-.cr-input--error {
-  border-color: #dc3545 !important;
-}
-
-.cr-input--error:focus {
-  border-color: #dc3545 !important;
-}
-
+.cr-input--error,
 .cr-select--error {
-  border-color: #dc3545 !important;
-}
-
-.cr-error-msg {
-  color: #dc3545;
-  font-size: 0.78rem;
-  margin-top: 4px;
-  padding-left: 0.5rem;
-}
-
-/* =========================================================
-   ESPACIADO CONTACTO
-========================================================= */
-
-.cr-contact-page {
-  padding-top: 3.5rem;
-  padding-bottom: 5rem;
-}
-
-.cr-contact-page header {
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.8rem !important;
-  margin-top: 0 !important;
-}
-
-.cr-contact-page .row {
-  margin-top: 0.5rem;
-}
-
-/* =========================================================
-   VALIDACIÓN ROJA COMO SOLICITAR CONSULTA
-========================================================= */
-
-.cr-input.ng-invalid.ng-touched,
-.cr-input--error {
   border-color: #dc3545 !important;
   box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.18) !important;
 }
@@ -152,11 +79,6 @@ textarea.cr-input {
 .cr-input--error:focus {
   border-color: #dc3545 !important;
   box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.22) !important;
-}
-
-.cr-select--error {
-  border-color: #dc3545 !important;
-  box-shadow: 0 0 0 0.12rem rgba(220, 53, 69, 0.18) !important;
 }
 
 .cr-error-msg {
@@ -167,23 +89,10 @@ textarea.cr-input {
   font-weight: 500;
 }
 
-/* Quita ticks verdes duplicados o raros */
-.cr-custom-select__trigger.selected::after {
-  content: none !important;
+.cr-input {
+  border-radius: 50rem !important;
 }
 
-/* Estética seleccionada sin romper colorimetría */
-.cr-custom-select__trigger.selected {
-  border-color: rgba(215, 177, 90, 0.65) !important;
-  color: #fff;
-}
-
-/* Flecha siempre visible */
-.cr-custom-select__arrow {
-  color: var(--cr-gold, #d7b15a);
-  transition: transform 0.2s ease;
-}
-
-.cr-custom-select__arrow.open {
-  transform: rotate(180deg);
+textarea.cr-input {
+  border-radius: 1rem !important;
 }
