@@ -20,7 +20,6 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
   productos: ProductoInterface[] = [];
   private sub!: Subscription;
 
-  // ← Usar inject() en lugar de constructor con parámetros
   private productService = inject(ProductService);
   private cart           = inject(CartService);
   private filterService  = inject(FilterService);
@@ -28,12 +27,15 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
   constructor() {}
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     this.productService.getProducts().subscribe(data => {
       this.todosLosProductos = data;
       this.aplicarFiltros();
     });
 
-    // Escucha el evento del modal
     this.sub = this.filterService.onAplicar().subscribe(() => {
       this.aplicarFiltros();
     });
