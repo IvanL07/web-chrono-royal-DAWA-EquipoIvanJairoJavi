@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import {ProductoInterface} from '../common/producto-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any[]> {
-    return this.http.get<any[]>(this.url);
+  getProducts(): Observable<ProductoInterface[]> {
+    return this.http.get<ProductoInterface[]>(this.url);
   }
 
-  getProductById(id: string): Observable<any> {
-    return this.http.get<any[]>(this.url).pipe(
+  getProductById(id: string): Observable<ProductoInterface | undefined> {
+    return this.http.get<ProductoInterface[]>(this.url).pipe(
       map(products => products.find(p => p.id === id))
     );
   }

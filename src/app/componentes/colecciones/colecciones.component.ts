@@ -5,6 +5,8 @@ import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { FilterService } from '../../services/filter.service';
 import { Subscription } from 'rxjs';
+import {ProductoInterface} from '../common/producto-interface';
+import { Product } from '../../interfaces/product.interface';
 
 @Component({
   selector: 'app-colecciones',
@@ -15,8 +17,8 @@ import { Subscription } from 'rxjs';
 })
 export class ColeccionesComponent implements OnInit, OnDestroy {
 
-  todosLosProductos: any[] = [];
-  productos: any[] = [];
+  todosLosProductos: ProductoInterface[] = [];
+  productos: ProductoInterface[] = [];
   private sub!: Subscription;
 
   // ← Usar inject() en lugar de constructor con parámetros
@@ -55,10 +57,10 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
     });
   }
 
-  addToCart(product: any): void {
+  addToCart(product: ProductoInterface[]): void {
     if (!product) return;
 
-    this.cart.add(product.id);
+    this.cart.add(Product.id);
   }
 
   formatEUR(value: number): string {
