@@ -5,8 +5,7 @@ import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { FilterService } from '../../services/filter.service';
 import { Subscription } from 'rxjs';
-import {ProductoInterface} from '../common/producto-interface';
-import { Product } from '../../interfaces/product.interface';
+import { ProductoInterface } from '../../common/producto-interface';
 
 @Component({
   selector: 'app-colecciones',
@@ -57,10 +56,10 @@ export class ColeccionesComponent implements OnInit, OnDestroy {
     });
   }
 
-  addToCart(product: ProductoInterface[]): void {
+  addToCart(product: ProductoInterface): void {
     if (!product) return;
 
-    this.cart.add(Product.id);
+    this.cart.add(product.id);
   }
 
   formatEUR(value: number): string {

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { RouterModule } from '@angular/router';
+import {ProductoInterface} from '../../common/producto-interface';
 
 @Component({
   selector: 'app-producto',
@@ -14,7 +15,7 @@ import { RouterModule } from '@angular/router';
 })
 export class ProductoComponent implements OnInit {
 
-  producto: any = null;
+  producto: ProductoInterface | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +28,7 @@ export class ProductoComponent implements OnInit {
     const id = this.route.snapshot.queryParamMap.get('id');
 
     this.productService.getProducts().subscribe(data => {
-      this.producto = data.find((p: any) => p.id === id);
+      this.producto = data.find((p: ProductoInterface) => p.id === id) || null;
     });
   }
 
